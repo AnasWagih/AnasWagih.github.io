@@ -440,30 +440,4 @@ All colors MUST be HSL.
     0% { transform: translateY(0); }
     100% { transform: translateY(100%); }
   }
-  
-  @keyframes pixel-bounce {
-    0%, 100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(-8px);
-    }
-  }
-  
-  @keyframes float {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-20px);
-    }
-  }
-  
-  .animate-pixel-bounce {
-    animation: pixel-bounce 1s ease-in-out infinite;
-  }
-  
-  .animate-float {
-    animation: float 3s ease-in-out infinite;
-  }
 }

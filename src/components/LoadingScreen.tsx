@@ -1,33 +1,39 @@
 import { useState, useEffect } from "react";
-import { Code, Zap, Star, Heart, Trophy, Sparkles } from "lucide-react";
+import { Sparkles, Zap, Cpu, Code, Rocket, Star, Heart, Trophy } from "lucide-react";
 
 const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
   const [progress, setProgress] = useState(0);
-  const [characterPos, setCharacterPos] = useState(0);
+  const [currentIcon, setCurrentIcon] = useState(0);
+  const [lives, setLives] = useState(3);
   const [coins, setCoins] = useState(0);
+  const [level, setLevel] = useState(1);
   const [characterFrame, setCharacterFrame] = useState(0);
-  const [currentStage, setCurrentStage] = useState(0);
-  const [collectedItems, setCollectedItems] = useState<number[]>([]);
+  const [dialogueIndex, setDialogueIndex] = useState(0);
 
-  const stages = [
-    { name: "SYSTEM INIT", icon: "⚙️", color: "hsl(190, 100%, 50%)" },
-    { name: "LOADING WORLD", icon: "🌍", color: "hsl(120, 100%, 50%)" },
-    { name: "SPAWNING ASSETS", icon: "📦", color: "hsl(50, 100%, 60%)" },
-    { name: "BUILDING QUEST", icon: "⚔️", color: "hsl(0, 100%, 60%)" },
-    { name: "READY!", icon: "✨", color: "hsl(330, 100%, 65%)" }
+  const icons = [
+    { Icon: Sparkles, color: "hsl(330, 100%, 65%)", emoji: "✨" },
+    { Icon: Zap, color: "hsl(50, 100%, 60%)", emoji: "⚡" },
+    { Icon: Cpu, color: "hsl(190, 100%, 50%)", emoji: "🎮" },
+    { Icon: Code, color: "hsl(280, 100%, 60%)", emoji: "💻" },
+    { Icon: Rocket, color: "hsl(30, 100%, 55%)", emoji: "🚀" },
+    { Icon: Star, color: "hsl(50, 100%, 60%)", emoji: "⭐" },
+    { Icon: Heart, color: "hsl(330, 100%, 65%)", emoji: "💜" },
+    { Icon: Trophy, color: "hsl(50, 100%, 60%)", emoji: "🏆" }
   ];
 
-  const items = [
-    { icon: "⭐", color: "hsl(50, 100%, 60%)" },
-    { icon: "💎", color: "hsl(190, 100%, 50%)" },
-    { icon: "🔥", color: "hsl(15, 100%, 55%)" },
-    { icon: "⚡", color: "hsl(50, 100%, 60%)" },
-    { icon: "💜", color: "hsl(280, 100%, 60%)" },
-    { icon: "🏆", color: "hsl(50, 100%, 60%)" }
+  const dialogues = [
+    "PLAYER 1 START!",
+    "LOADING ASSETS...",
+    "SPAWNING HERO...",
+    "PREPARING WORLD...",
+    "CHECKING INVENTORY...",
+    "READY TO ADVENTURE!",
+    "GAME ON!",
+    "LET'S GO!"
   ];
 
   useEffect(() => {
-    const duration = 3000;
+    const duration = 2500;
     const steps = 100;
     const stepDuration = duration / steps;
     let currentStep = 0;
@@ -36,212 +42,224 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
       currentStep++;
       const newProgress = (currentStep / steps) * 100;
       setProgress(newProgress);
-      setCharacterPos(newProgress);
       
-      // Animate character walking
-      if (currentStep % 8 === 0) {
+      if (currentStep % 10 === 0) {
+        setCurrentIcon(prev => (prev + 1) % icons.length);
+        setCoins(prev => prev + Math.floor(Math.random() * 10) + 5);
         setCharacterFrame(prev => (prev + 1) % 4);
       }
 
-      // Stage progression
-      const stageIndex = Math.floor((newProgress / 100) * stages.length);
-      setCurrentStage(Math.min(stageIndex, stages.length - 1));
+      if (currentStep % 12 === 0) {
+        setDialogueIndex(prev => (prev + 1) % dialogues.length);
+      }
 
-      // Collect items along the way
-      const itemThreshold = 100 / items.length;
-      const currentItemIndex = Math.floor(newProgress / itemThreshold);
-      if (currentItemIndex < items.length && !collectedItems.includes(currentItemIndex)) {
-        setCollectedItems(prev => [...prev, currentItemIndex]);
-        setCoins(prev => prev + 100);
+      if (currentStep % 25 === 0) {
+        setLevel(prev => prev + 1);
       }
 
       if (currentStep >= steps) {
         clearInterval(interval);
-        setTimeout(onLoadComplete, 500);
+        setTimeout(onLoadComplete, 400);
       }
     }, stepDuration);
 
     return () => clearInterval(interval);
-  }, [onLoadComplete, collectedItems, items.length, stages.length]);
+  }, [onLoadComplete]);
 
-  // Character walking animation frames
-  const characterFrames = ["🚶", "🚶‍♂️", "🚶", "🚶‍♂️"];
-  const currentStageData = stages[currentStage];
+  const { Icon, color } = icons[currentIcon];
+
+  // Pixel art character animation frames
+  const characterFrames = [
+    "🧙‍♂️", "🧙", "🧙‍♂️", "🧙"
+  ];
 
   return (
     <div className="fixed inset-0 z-50 bg-background overflow-hidden select-none">
       {/* Pixel grid background */}
-      <div className="absolute inset-0 opacity-5" style={{
+      <div className="absolute inset-0 opacity-10" style={{
         backgroundImage: `
-          linear-gradient(hsl(var(--primary)) 1px, transparent 1px),
-          linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)
+          linear-gradient(hsl(330, 100%, 65%) 1px, transparent 1px),
+          linear-gradient(90deg, hsl(330, 100%, 65%) 1px, transparent 1px)
         `,
-        backgroundSize: '32px 32px'
+        backgroundSize: '20px 20px'
       }} />
 
-      {/* Floating clouds */}
-      <div className="absolute top-20 left-[10%] text-6xl opacity-30 animate-float">☁️</div>
-      <div className="absolute top-40 right-[15%] text-5xl opacity-20 animate-float" style={{ animationDelay: '1s' }}>☁️</div>
-
-      <div className="relative h-full w-full flex flex-col items-center justify-center p-4 md:p-8">
-        <div className="max-w-4xl w-full space-y-8">
+      {/* Main container */}
+      <div className="relative h-full w-full flex items-center justify-center p-4">
+        <div className="max-w-5xl w-full space-y-6">
           
-          {/* Game Title Card */}
-          <div className="glass-strong p-6 border-4 border-primary relative">
-            <div className="pixel-corners" />
-            <div className="text-center">
-              <div className="text-4xl md:text-5xl font-pixel gradient-text mb-2 animate-pixel-bounce">
-                ANAS.DEV
-              </div>
-              <div className="text-xs md:text-sm font-pixel text-secondary">
-                &gt;&gt; ADVENTURE LOADING...
+          {/* Game HUD - Top Row */}
+          <div className="grid grid-cols-3 gap-4">
+            {/* Score */}
+            <div className="glass-strong p-4 border-4 border-primary relative">
+              <div className="absolute -top-2 -left-2 w-3 h-3 bg-primary" />
+              <div className="absolute -top-2 -right-2 w-3 h-3 bg-secondary" />
+              <div className="text-xs font-pixel text-muted-foreground mb-1">SCORE</div>
+              <div className="text-2xl font-pixel text-primary tabular-nums">{coins * 100}</div>
+            </div>
+
+            {/* Level */}
+            <div className="glass-strong p-4 border-4 border-accent relative">
+              <div className="absolute -top-2 -left-2 w-3 h-3 bg-accent" />
+              <div className="absolute -top-2 -right-2 w-3 h-3 bg-primary" />
+              <div className="text-xs font-pixel text-muted-foreground mb-1">LEVEL</div>
+              <div className="text-2xl font-pixel text-accent tabular-nums">{level}</div>
+            </div>
+
+            {/* Lives */}
+            <div className="glass-strong p-4 border-4 border-destructive relative">
+              <div className="absolute -top-2 -left-2 w-3 h-3 bg-destructive" />
+              <div className="absolute -top-2 -right-2 w-3 h-3 bg-accent" />
+              <div className="text-xs font-pixel text-muted-foreground mb-1">LIVES</div>
+              <div className="text-2xl font-pixel flex gap-2">
+                {[...Array(lives)].map((_, i) => (
+                  <Heart key={i} className="w-6 h-6 fill-destructive text-destructive animate-pixel-bounce" style={{ animationDelay: `${i * 0.1}s` }} />
+                ))}
               </div>
             </div>
           </div>
 
-          {/* HUD Stats */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-            <div className="glass-strong p-3 md:p-4 border-4 border-accent relative">
-              <div className="pixel-corners" />
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="text-2xl md:text-3xl">💰</div>
-                <div>
-                  <div className="text-xs font-pixel text-muted-foreground">COINS</div>
-                  <div className="text-lg md:text-xl font-pixel text-accent">{coins}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-strong p-3 md:p-4 border-4 border-primary relative">
-              <div className="pixel-corners" />
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="text-2xl md:text-3xl">📦</div>
-                <div>
-                  <div className="text-xs font-pixel text-muted-foreground">ITEMS</div>
-                  <div className="text-lg md:text-xl font-pixel text-primary">{collectedItems.length}/{items.length}</div>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-strong p-3 md:p-4 border-4 border-secondary relative col-span-2 md:col-span-1">
-              <div className="pixel-corners" />
-              <div className="flex items-center gap-2 md:gap-3">
-                <div className="text-2xl md:text-3xl">{currentStageData.icon}</div>
-                <div className="flex-1">
-                  <div className="text-xs font-pixel text-muted-foreground">STAGE</div>
-                  <div className="text-sm md:text-base font-pixel text-secondary truncate">{currentStageData.name}</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Game World */}
-          <div className="glass-strong p-4 md:p-8 border-4 border-primary relative min-h-[300px] md:min-h-[400px]">
-            <div className="pixel-corners" />
+          {/* Main Game Screen */}
+          <div className="glass-strong p-8 border-4 border-secondary relative">
+            <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary" />
+            <div className="absolute -top-2 -right-2 w-4 h-4 bg-secondary" />
+            <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-accent" />
+            <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary" />
             
-            {/* Ground */}
-            <div className="absolute bottom-16 md:bottom-24 left-0 right-0 h-12 md:h-16 border-t-4 border-primary" style={{
-              background: 'repeating-linear-gradient(90deg, hsl(var(--primary)) 0px, hsl(var(--primary)) 16px, hsl(var(--secondary)) 16px, hsl(var(--secondary)) 32px)'
-            }} />
-
-            {/* Items to collect along the path */}
-            <div className="absolute bottom-28 md:bottom-40 left-0 right-0 flex justify-between px-4 md:px-8">
-              {items.map((item, i) => {
-                const itemPosition = ((i + 1) / items.length) * 100;
-                const isCollected = collectedItems.includes(i);
-                return (
-                  <div 
-                    key={i}
-                    className={`text-3xl md:text-4xl transition-all duration-300 ${
-                      isCollected ? 'opacity-20 scale-50' : 'animate-pixel-bounce'
-                    }`}
-                    style={{ animationDelay: `${i * 0.2}s` }}
-                  >
-                    {item.icon}
+            <div className="space-y-6">
+              {/* Character and Icon Display */}
+              <div className="grid grid-cols-2 gap-6">
+                {/* Pixel Art Character */}
+                <div className="glass-strong p-6 border-4 border-primary relative flex flex-col items-center justify-center">
+                  <div className="absolute -top-2 -left-2 w-3 h-3 bg-primary" />
+                  <div className="absolute -top-2 -right-2 w-3 h-3 bg-accent" />
+                  <div className="text-6xl animate-pixel-bounce mb-4">
+                    {characterFrames[characterFrame]}
                   </div>
-                );
-              })}
-            </div>
+                  <div className="font-pixel text-xs text-primary">HERO</div>
+                  <div className="w-full h-2 bg-muted border-2 border-border mt-3">
+                    <div 
+                      className="h-full bg-primary transition-all"
+                      style={{ width: `${progress}%` }}
+                    />
+                  </div>
+                </div>
 
-            {/* Walking Character */}
-            <div 
-              className="absolute bottom-24 md:bottom-32 text-5xl md:text-6xl transition-all duration-100"
-              style={{ 
-                left: `${Math.min(characterPos, 85)}%`,
-                transform: 'translateX(-50%)'
-              }}
-            >
-              {characterFrames[characterFrame]}
-            </div>
-
-            {/* Speech Bubble */}
-            <div className="absolute top-4 md:top-8 left-1/2 -translate-x-1/2 w-full max-w-md px-4">
-              <div className="glass-strong p-4 md:p-6 border-4 border-accent relative">
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 w-0 h-0 border-l-[12px] border-r-[12px] border-t-[12px] border-l-transparent border-r-transparent border-t-accent" />
-                <div className="text-center">
-                  <div className="text-xs font-pixel text-muted-foreground mb-2">&gt;&gt; QUEST LOG</div>
+                {/* Item/Icon Display */}
+                <div className="glass-strong p-6 border-4 border-secondary relative flex flex-col items-center justify-center">
+                  <div className="absolute -top-2 -left-2 w-3 h-3 bg-secondary" />
+                  <div className="absolute -top-2 -right-2 w-3 h-3 bg-primary" />
                   <div 
-                    className="text-sm md:text-base font-pixel"
-                    style={{ color: currentStageData.color }}
+                    className="p-6 border-4 animate-glow mb-4"
+                    style={{ borderColor: color }}
                   >
-                    {currentStageData.name}
+                    <Icon 
+                      className="w-16 h-16 animate-pixel-bounce"
+                      style={{ color }}
+                    />
+                  </div>
+                  <div className="font-pixel text-xs text-secondary">POWER-UP</div>
+                </div>
+              </div>
+
+              {/* Dialogue Box */}
+              <div className="glass-strong p-6 border-4 border-accent relative">
+                <div className="absolute -top-2 -left-2 w-3 h-3 bg-accent" />
+                <div className="absolute -top-2 -right-2 w-3 h-3 bg-primary" />
+                <div className="absolute -bottom-2 -left-2 w-3 h-3 bg-primary" />
+                <div className="absolute -bottom-2 -right-2 w-3 h-3 bg-secondary" />
+                
+                {/* Dialogue arrow */}
+                <div className="absolute -top-4 left-8 w-0 h-0 border-l-8 border-r-8 border-b-8 border-l-transparent border-r-transparent border-b-accent" />
+                
+                <div className="flex items-start gap-3">
+                  <div className="text-3xl">{characterFrames[characterFrame]}</div>
+                  <div className="flex-1">
+                    <div className="font-pixel text-xs text-accent mb-2">&gt;&gt; SYSTEM MESSAGE:</div>
+                    <p className="font-pixel text-sm animate-pulse" style={{ color }}>
+                      {dialogues[dialogueIndex]}
+                    </p>
                   </div>
                 </div>
               </div>
+
+              {/* Progress Bar */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-sm font-pixel">
+                  <span className="text-secondary">LOADING</span>
+                  <span className="text-accent">{Math.round(progress)}%</span>
+                </div>
+                <div className="h-8 bg-muted border-4 border-border relative overflow-hidden">
+                  <div 
+                    className="h-full transition-all relative"
+                    style={{ 
+                      width: `${progress}%`,
+                      background: `repeating-linear-gradient(
+                        90deg,
+                        ${color},
+                        ${color} 10px,
+                        hsl(190, 100%, 50%) 10px,
+                        hsl(190, 100%, 50%) 20px
+                      )`,
+                      transitionDuration: '0.1s'
+                    }}
+                  >
+                    {/* Scanline effect */}
+                    <div className="absolute inset-0 opacity-20" style={{
+                      background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.1) 2px, rgba(255,255,255,0.1) 4px)'
+                    }} />
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center font-pixel text-xs text-foreground drop-shadow-lg">
+                    {Math.round(progress)}%
+                  </div>
+                </div>
+              </div>
+
+              {/* Coin Counter */}
+              <div className="flex justify-center items-center gap-3 glass p-3 border-2 border-accent">
+                <div className="w-6 h-6 bg-accent animate-float" style={{
+                  clipPath: 'polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)'
+                }} />
+                <span className="text-xl font-pixel text-accent">x {coins}</span>
+              </div>
             </div>
           </div>
 
-          {/* Progress Bar */}
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-xs md:text-sm font-pixel text-secondary">LOADING PROGRESS</span>
-              <span className="text-xs md:text-sm font-pixel text-accent">{Math.round(progress)}%</span>
-            </div>
-            <div className="relative h-8 md:h-10 border-4 border-border glass-strong overflow-hidden">
-              <div 
-                className="absolute inset-0 transition-all duration-100"
-                style={{ 
-                  width: `${progress}%`,
-                  background: `repeating-linear-gradient(
-                    45deg,
-                    hsl(var(--primary)),
-                    hsl(var(--primary)) 10px,
-                    hsl(var(--secondary)) 10px,
-                    hsl(var(--secondary)) 20px
-                  )`,
-                  boxShadow: `inset 0 0 20px ${currentStageData.color}`
-                }}
-              >
-                <div className="absolute inset-0 scanline-effect opacity-30" />
-              </div>
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="font-pixel text-xs md:text-sm text-foreground drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-                  {Math.round(progress)}% COMPLETE
-                </span>
-              </div>
-            </div>
+          {/* Power-ups Grid */}
+          <div className="grid grid-cols-8 gap-2">
+            {icons.map((iconData, i) => {
+              const IconComp = iconData.Icon;
+              const isActive = i === currentIcon;
+              return (
+                <div 
+                  key={i}
+                  className={`glass-strong p-3 border-2 transition-all relative ${
+                    isActive ? 'border-primary scale-110' : 'border-border opacity-50'
+                  }`}
+                  style={{
+                    transitionDuration: '0.1s',
+                    boxShadow: isActive ? `0 0 0 4px ${iconData.color}, 4px 4px 0 hsl(220, 15%, 5%)` : '4px 4px 0 hsl(220, 15%, 5%)'
+                  }}
+                >
+                  {isActive && (
+                    <>
+                      <div className="absolute -top-1 -left-1 w-2 h-2 bg-primary" />
+                      <div className="absolute -top-1 -right-1 w-2 h-2 bg-accent" />
+                    </>
+                  )}
+                  <IconComp 
+                    className="w-5 h-5"
+                    style={{ color: iconData.color }}
+                  />
+                </div>
+              );
+            })}
           </div>
 
-          {/* Collected Items Display */}
-          <div className="flex justify-center gap-2 flex-wrap">
-            {items.map((item, i) => (
-              <div 
-                key={i}
-                className={`glass-strong p-2 md:p-3 border-2 transition-all ${
-                  collectedItems.includes(i) 
-                    ? 'border-accent scale-110' 
-                    : 'border-border opacity-30'
-                }`}
-              >
-                <div className="text-xl md:text-2xl">{item.icon}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Footer Message */}
+          {/* Start Prompt */}
           <div className="text-center">
             <p className="text-xs font-pixel text-muted-foreground tracking-widest animate-pulse">
-              ▶ PREPARING YOUR ADVENTURE ◀
+              ▶ PRESS START TO CONTINUE ◀
             </p>
           </div>
 

@@ -97,7 +97,7 @@ const Hero = () => {
               <span className="font-sans text-lg">GitHub</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/anas-wagih-9423a7232/"
+              href="https://linkedin.com/in/AnasWagih"
               target="_blank"
               rel="noopener noreferrer"
               className="glass px-6 py-3 border-4 border-secondary hover:scale-110 transition-all glow-on-hover flex items-center gap-2 relative overflow-hidden group"
