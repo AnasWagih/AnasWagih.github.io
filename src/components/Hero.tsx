@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Mail, Phone, Sparkles } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRipple } from "@/hooks/useRipple";
 import { useMagnetic } from "@/hooks/useMagnetic";
@@ -32,14 +32,6 @@ const Hero = () => {
               alt="Pixel avatar" 
               className="w-24 h-24 md:w-32 md:h-32 animate-float pixelated border-4 border-primary rounded-lg glow-on-hover shadow-[0_0_20px_rgba(255,0,255,0.5)]"
             />
-            <div className="inline-block glass-strong px-6 py-3 glow-on-hover border-4 border-primary shimmer-effect">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-primary animate-pixel-bounce" />
-                <p className="text-sm font-pixel text-primary">
-                  &gt;&gt; WELCOME
-                </p>
-              </div>
-            </div>
           </div>
           
           <h1 
