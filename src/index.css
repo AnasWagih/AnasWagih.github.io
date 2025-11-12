@@ -440,4 +440,10 @@ All colors MUST be HSL.
     0% { transform: translateY(0); }
     100% { transform: translateY(100%); }
   }
+  
+  .pixelated {
+    image-rendering: pixelated;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: crisp-edges;
+  }
 }
