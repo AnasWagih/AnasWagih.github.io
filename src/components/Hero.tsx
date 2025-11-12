@@ -3,6 +3,7 @@ import { Button } from "./ui/button";
 import { useRipple } from "@/hooks/useRipple";
 import { useMagnetic } from "@/hooks/useMagnetic";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import pixelAvatar from "@/assets/pixel-avatar.png";
 
 const Hero = () => {
   const createRipple = useRipple();
@@ -34,16 +35,23 @@ const Hero = () => {
             </div>
           </div>
           
-          <h1 
-            ref={titleRef}
-            className={`text-3xl md:text-4xl lg:text-5xl font-pixel mb-8 leading-tight transition-all duration-1000 px-4 ${
-              titleVisible ? 'reveal-up opacity-100' : 'opacity-0'
-            }`}
-          >
-            <span className="gradient-text inline-block hover:scale-105 transition-all">
-              Anas M. Wagih
-            </span>
-          </h1>
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <img 
+              src={pixelAvatar} 
+              alt="Pixel avatar" 
+              className="w-16 h-16 md:w-20 md:h-20 animate-float pixelated border-4 border-primary rounded-lg glow-on-hover"
+            />
+            <h1 
+              ref={titleRef}
+              className={`text-3xl md:text-4xl lg:text-5xl font-pixel leading-tight transition-all duration-1000 ${
+                titleVisible ? 'reveal-up opacity-100' : 'opacity-0'
+              }`}
+            >
+              <span className="gradient-text inline-block hover:scale-105 transition-all">
+                Anas M. Wagih
+              </span>
+            </h1>
+          </div>
           
           <h2 
             ref={subtitleRef}
