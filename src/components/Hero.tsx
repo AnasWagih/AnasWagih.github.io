@@ -1,4 +1,4 @@
-import { ArrowDown, Github, Linkedin, Mail, Phone, Sparkles } from "lucide-react";
+import { ArrowDown, Github, Linkedin, Mail, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { useRipple } from "@/hooks/useRipple";
 import { useMagnetic } from "@/hooks/useMagnetic";
