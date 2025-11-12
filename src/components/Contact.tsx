@@ -119,14 +119,16 @@ const Contact = () => {
           </div>
           
           <div className="mt-8 text-center">
-            <a
-              href="mailto:anaswagih35@gmail.com"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-primary to-secondary hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 hover:scale-110 font-bold text-lg border border-white/20 hover:border-white/40 glow-on-hover relative overflow-hidden group shimmer-effect"
-              onClick={(e) => createRipple(e)}
+            <Button
+              asChild
+              size="lg"
+              className="group"
             >
-              <Send className="w-6 h-6 group-hover:translate-x-1 group-hover:rotate-12 transition-transform" />
-              Send me a message
-            </a>
+              <a href="mailto:anaswagih35@gmail.com">
+                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                Send me a message
+              </a>
+            </Button>
           </div>
         </div>
       </div>
