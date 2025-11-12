@@ -26,32 +26,32 @@ const Hero = () => {
       
       <div className="max-w-6xl mx-auto text-center relative z-10">
         <div>
-          <div className="inline-block glass-strong px-6 py-3 mb-8 glow-on-hover border-4 border-primary shimmer-effect">
-            <div className="flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-primary animate-pixel-bounce" />
-              <p className="text-sm font-pixel text-primary">
-                &gt;&gt; WELCOME
-              </p>
-            </div>
-          </div>
-          
           <div className="flex items-center justify-center gap-4 mb-8">
             <img 
               src={pixelAvatar} 
               alt="Pixel avatar" 
-              className="w-16 h-16 md:w-20 md:h-20 animate-float pixelated border-4 border-primary rounded-lg glow-on-hover"
+              className="w-24 h-24 md:w-32 md:h-32 animate-float pixelated border-4 border-primary rounded-lg glow-on-hover shadow-[0_0_20px_rgba(255,0,255,0.5)]"
             />
-            <h1 
-              ref={titleRef}
-              className={`text-3xl md:text-4xl lg:text-5xl font-pixel leading-tight transition-all duration-1000 ${
-                titleVisible ? 'reveal-up opacity-100' : 'opacity-0'
-              }`}
-            >
-              <span className="gradient-text inline-block hover:scale-105 transition-all">
-                Anas M. Wagih
-              </span>
-            </h1>
+            <div className="inline-block glass-strong px-6 py-3 glow-on-hover border-4 border-primary shimmer-effect">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-4 h-4 text-primary animate-pixel-bounce" />
+                <p className="text-sm font-pixel text-primary">
+                  &gt;&gt; WELCOME
+                </p>
+              </div>
+            </div>
           </div>
+          
+          <h1 
+            ref={titleRef}
+            className={`text-3xl md:text-4xl lg:text-5xl font-pixel mb-8 leading-tight transition-all duration-1000 px-4 ${
+              titleVisible ? 'reveal-up opacity-100' : 'opacity-0'
+            }`}
+          >
+            <span className="gradient-text inline-block hover:scale-105 transition-all">
+              Anas M. Wagih
+            </span>
+          </h1>
           
           <h2 
             ref={subtitleRef}
