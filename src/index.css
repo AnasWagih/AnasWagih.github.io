@@ -8,51 +8,51 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 260 30% 8%;
-    --foreground: 45 100% 95%;
+    --background: 220 15% 10%;
+    --foreground: 0 0% 100%;
 
-    --card: 260 25% 12%;
-    --card-foreground: 45 100% 95%;
+    --card: 220 15% 15%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 260 25% 12%;
-    --popover-foreground: 45 100% 95%;
+    --popover: 220 15% 15%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 25 100% 60%;
-    --primary-foreground: 260 30% 8%;
+    --primary: 330 100% 65%;
+    --primary-foreground: 0 0% 100%;
 
-    --secondary: 280 85% 65%;
-    --secondary-foreground: 45 100% 95%;
+    --secondary: 190 100% 50%;
+    --secondary-foreground: 220 15% 10%;
 
-    --muted: 260 20% 20%;
-    --muted-foreground: 260 10% 65%;
+    --muted: 220 10% 25%;
+    --muted-foreground: 220 8% 70%;
 
-    --accent: 175 80% 55%;
-    --accent-foreground: 260 30% 8%;
+    --accent: 50 100% 60%;
+    --accent-foreground: 220 15% 10%;
 
-    --destructive: 0 85% 60%;
-    --destructive-foreground: 45 100% 95%;
+    --destructive: 0 100% 50%;
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 260 25% 18%;
-    --input: 260 25% 18%;
-    --ring: 25 100% 60%;
+    --border: 220 15% 20%;
+    --input: 220 15% 20%;
+    --ring: 330 100% 65%;
 
     --radius: 0;
     
-    --gradient-primary: linear-gradient(135deg, hsl(25, 100%, 60%) 0%, hsl(15, 100%, 55%) 100%);
-    --gradient-secondary: linear-gradient(135deg, hsl(280, 85%, 65%) 0%, hsl(260, 80%, 60%) 100%);
-    --gradient-accent: linear-gradient(135deg, hsl(175, 80%, 55%) 0%, hsl(165, 75%, 50%) 100%);
-    --gradient-glow: radial-gradient(circle, hsl(25, 100%, 60%) 0%, transparent 70%);
-    --gradient-bg: repeating-conic-gradient(from 0deg, hsl(260, 30%, 6%) 0deg 90deg, hsl(260, 30%, 8%) 90deg 180deg) 0 0 / 40px 40px;
+    --gradient-primary: linear-gradient(135deg, hsl(330, 100%, 65%) 0%, hsl(280, 100%, 60%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(190, 100%, 50%) 0%, hsl(160, 100%, 45%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(50, 100%, 60%) 0%, hsl(30, 100%, 55%) 100%);
+    --gradient-glow: radial-gradient(circle, hsl(330, 100%, 65%) 0%, transparent 70%);
+    --gradient-bg: linear-gradient(135deg, hsl(220, 15%, 8%) 0%, hsl(260, 20%, 12%) 50%, hsl(220, 15%, 8%) 100%);
     
-    --glass-bg: hsl(260, 25%, 12%);
-    --glass-border: hsl(260, 25%, 22%);
-    --glass-shadow: 0 4px 0 0 hsl(260, 30%, 4%);
-    --glass-glow: 0 0 0 4px hsl(25, 100%, 60%);
+    --glass-bg: linear-gradient(135deg, hsl(220, 15%, 15%) 0%, hsl(240, 20%, 18%) 100%);
+    --glass-border: hsl(220, 15%, 25%);
+    --glass-shadow: 0 8px 0 0 hsl(220, 15%, 5%);
+    --glass-glow: 0 0 20px 2px hsl(330, 100%, 65%);
     
     --transition-smooth: all 0.1s steps(3);
     
-    --pixel-shadow: 4px 4px 0 hsl(260, 30%, 4%);
-    --pixel-inset: inset 4px 4px 0 rgba(255, 180, 120, 0.1), inset -4px -4px 0 rgba(0, 0, 0, 0.4);
+    --pixel-shadow: 8px 8px 0 hsl(220, 15%, 5%);
+    --pixel-inset: inset 2px 2px 0 rgba(255, 255, 255, 0.1), inset -2px -2px 0 rgba(0, 0, 0, 0.3);
 
     --sidebar-background: 0 0% 98%;
 
@@ -88,6 +88,35 @@ All colors MUST be HSL.
     image-rendering: pixelated;
     image-rendering: -moz-crisp-edges;
     image-rendering: crisp-edges;
+    position: relative;
+  }
+  
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: 
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 4px,
+        rgba(255, 0, 255, 0.03) 4px,
+        rgba(255, 0, 255, 0.03) 8px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        rgba(0, 255, 255, 0.03) 4px,
+        rgba(0, 255, 255, 0.03) 8px
+      );
+    pointer-events: none;
+    z-index: 1;
+  }
+  
+  body > * {
+    position: relative;
+    z-index: 2;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -110,9 +139,15 @@ All colors MUST be HSL.
 @layer utilities {
   .glass {
     background: var(--glass-bg);
-    border: 4px solid var(--glass-border);
-    box-shadow: var(--pixel-shadow);
+    border: 6px solid var(--glass-border);
+    box-shadow: var(--pixel-shadow), 0 0 30px rgba(255, 0, 255, 0.2);
     position: relative;
+    clip-path: polygon(
+      0 8px, 8px 8px, 8px 0,
+      calc(100% - 8px) 0, calc(100% - 8px) 8px, 100% 8px,
+      100% calc(100% - 8px), calc(100% - 8px) calc(100% - 8px), calc(100% - 8px) 100%,
+      8px 100%, 8px calc(100% - 8px), 0 calc(100% - 8px)
+    );
   }
   
   .glass::before {
@@ -130,10 +165,16 @@ All colors MUST be HSL.
   }
   
   .glass-strong {
-    background: hsl(220, 15%, 15%);
-    border: 4px solid hsl(220, 15%, 25%);
-    box-shadow: var(--pixel-shadow), var(--pixel-inset);
+    background: var(--glass-bg);
+    border: 6px solid hsl(330, 100%, 65%);
+    box-shadow: var(--pixel-shadow), inset 0 0 20px rgba(255, 0, 255, 0.1), 0 0 40px rgba(255, 0, 255, 0.3);
     position: relative;
+    clip-path: polygon(
+      0 12px, 12px 12px, 12px 0,
+      calc(100% - 12px) 0, calc(100% - 12px) 12px, 100% 12px,
+      100% calc(100% - 12px), calc(100% - 12px) calc(100% - 12px), calc(100% - 12px) 100%,
+      12px 100%, 12px calc(100% - 12px), 0 calc(100% - 12px)
+    );
   }
   
   .glass-strong::before {
@@ -167,15 +208,27 @@ All colors MUST be HSL.
   .gradient-border {
     position: relative;
     background: var(--glass-bg);
-    border: 4px solid hsl(25, 100%, 60%);
-    box-shadow: var(--pixel-shadow);
+    border: 6px solid hsl(330, 100%, 65%);
+    box-shadow: var(--pixel-shadow), 0 0 30px rgba(255, 0, 255, 0.4);
+    clip-path: polygon(
+      0 10px, 10px 10px, 10px 0,
+      calc(100% - 10px) 0, calc(100% - 10px) 10px, 100% 10px,
+      100% calc(100% - 10px), calc(100% - 10px) calc(100% - 10px), calc(100% - 10px) 100%,
+      10px 100%, 10px calc(100% - 10px), 0 calc(100% - 10px)
+    );
   }
   
   .gradient-border::after {
     content: '';
     position: absolute;
-    inset: 8px;
-    border: 2px solid hsl(280, 85%, 65%);
+    inset: 12px;
+    border: 3px solid hsl(190, 100%, 50%);
+    clip-path: polygon(
+      0 6px, 6px 6px, 6px 0,
+      calc(100% - 6px) 0, calc(100% - 6px) 6px, 100% 6px,
+      100% calc(100% - 6px), calc(100% - 6px) calc(100% - 6px), calc(100% - 6px) 100%,
+      6px 100%, 6px calc(100% - 6px), 0 calc(100% - 6px)
+    );
     pointer-events: none;
   }
   
@@ -183,21 +236,21 @@ All colors MUST be HSL.
     position: fixed;
     width: 16px;
     height: 16px;
-    background: hsl(25, 100%, 60%);
-    border: 2px solid hsl(45, 100%, 95%);
+    background: hsl(330, 100%, 65%);
+    border: 2px solid hsl(0, 0%, 100%);
     pointer-events: none;
     z-index: 9999;
     transition: transform 0.05s steps(2);
-    box-shadow: 2px 2px 0 hsl(260, 30%, 4%);
+    box-shadow: 2px 2px 0 hsl(220, 15%, 5%);
     image-rendering: pixelated;
   }
   
   .custom-cursor-hover {
     width: 24px;
     height: 24px;
-    background: hsl(175, 80%, 55%);
-    border: 3px solid hsl(25, 100%, 60%);
-    box-shadow: 3px 3px 0 hsl(260, 30%, 4%);
+    background: hsl(50, 100%, 60%);
+    border: 3px solid hsl(330, 100%, 65%);
+    box-shadow: 3px 3px 0 hsl(220, 15%, 5%);
   }
   
   @keyframes orb-float {
@@ -350,13 +403,13 @@ All colors MUST be HSL.
   }
   
   .interactive-hover:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 8px 0 hsl(260, 30%, 4%), 0 0 0 4px hsl(25, 100%, 60%);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 12px 0 hsl(220, 15%, 5%), 0 0 40px rgba(255, 0, 255, 0.5);
   }
   
   .interactive-hover:active {
     transform: translateY(-4px);
-    box-shadow: 0 4px 0 hsl(260, 30%, 4%);
+    box-shadow: 0 4px 0 hsl(220, 15%, 5%);
   }
   
   .magnetic-hover {
@@ -377,13 +430,13 @@ All colors MUST be HSL.
   }
   
   .glow-on-hover:hover {
-    box-shadow: 0 0 0 4px hsl(25, 100%, 60%), var(--pixel-shadow);
+    box-shadow: 0 0 0 6px hsl(330, 100%, 65%), var(--pixel-shadow), 0 0 40px rgba(255, 0, 255, 0.6);
     animation: pixel-glow 0.4s steps(4) infinite;
   }
   
   @keyframes pixel-glow {
-    0%, 100% { box-shadow: 0 0 0 4px hsl(25, 100%, 60%), var(--pixel-shadow); }
-    50% { box-shadow: 0 0 0 4px hsl(175, 80%, 55%), var(--pixel-shadow); }
+    0%, 100% { box-shadow: 0 0 0 6px hsl(330, 100%, 65%), var(--pixel-shadow), 0 0 40px rgba(255, 0, 255, 0.6); }
+    50% { box-shadow: 0 0 0 6px hsl(50, 100%, 60%), var(--pixel-shadow), 0 0 40px rgba(255, 255, 0, 0.6); }
   }
   
   .parallax-layer {
@@ -397,7 +450,7 @@ All colors MUST be HSL.
     position: absolute;
     width: 8px;
     height: 8px;
-    background: hsl(25, 100%, 60%);
+    background: hsl(330, 100%, 65%);
   }
   
   .pixel-corners::before {
