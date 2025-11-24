@@ -89,8 +89,18 @@ export default {
           "100%": { transform: "scale(1)", opacity: "1" }
         },
         "glow": {
-          "0%, 100%": { boxShadow: "0 0 0 6px hsl(330, 100%, 65%), 8px 8px 0 hsl(220, 15%, 5%)" },
-          "50%": { boxShadow: "0 0 0 6px hsl(50, 100%, 60%), 8px 8px 0 hsl(220, 15%, 5%)" }
+          "0%, 100%": { 
+            boxShadow: "0 0 0 6px hsl(330, 100%, 65%), 8px 8px 0 hsl(220, 15%, 5%), 0 0 40px rgba(255, 0, 255, 0.6)" 
+          },
+          "25%": {
+            boxShadow: "0 0 0 6px hsl(190, 100%, 50%), 8px 8px 0 hsl(220, 15%, 5%), 0 0 40px rgba(0, 255, 255, 0.6)"
+          },
+          "50%": { 
+            boxShadow: "0 0 0 6px hsl(50, 100%, 60%), 8px 8px 0 hsl(220, 15%, 5%), 0 0 40px rgba(255, 255, 0, 0.6)" 
+          },
+          "75%": {
+            boxShadow: "0 0 0 6px hsl(280, 100%, 60%), 8px 8px 0 hsl(220, 15%, 5%), 0 0 40px rgba(180, 0, 255, 0.6)"
+          }
         },
         "float": {
           "0%, 100%": { transform: "translateY(0px)" },
@@ -99,8 +109,32 @@ export default {
           "75%": { transform: "translateY(-8px)" }
         },
         "pixel-bounce": {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-12px)" }
+          "0%, 100%": { 
+            transform: "translateY(0)",
+            filter: "drop-shadow(0 0 8px rgba(255, 0, 255, 0.6))"
+          },
+          "50%": { 
+            transform: "translateY(-12px)",
+            filter: "drop-shadow(0 0 12px rgba(0, 255, 255, 0.8))"
+          }
+        },
+        "rainbow-pulse": {
+          "0%, 100%": {
+            borderColor: "hsl(330, 100%, 65%)",
+            boxShadow: "0 0 20px rgba(255, 0, 255, 0.5)"
+          },
+          "25%": {
+            borderColor: "hsl(190, 100%, 50%)",
+            boxShadow: "0 0 20px rgba(0, 255, 255, 0.5)"
+          },
+          "50%": {
+            borderColor: "hsl(50, 100%, 60%)",
+            boxShadow: "0 0 20px rgba(255, 255, 0, 0.5)"
+          },
+          "75%": {
+            borderColor: "hsl(280, 100%, 60%)",
+            boxShadow: "0 0 20px rgba(180, 0, 255, 0.5)"
+          }
         },
       },
       animation: {
@@ -113,7 +147,8 @@ export default {
         "scale-in": "scale-in 0.3s steps(3)",
         "glow": "glow 0.8s steps(4) infinite",
         "float": "float 1.2s steps(6) infinite",
-        "pixel-bounce": "pixel-bounce 0.6s steps(4) infinite",
+        "pixel-bounce": "pixel-bounce 0.8s ease-in-out infinite",
+        "rainbow-pulse": "rainbow-pulse 4s ease-in-out infinite",
       },
     },
   },
