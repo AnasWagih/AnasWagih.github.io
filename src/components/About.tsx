@@ -135,8 +135,7 @@ const About = () => {
               <div>
                 <p className="text-muted-foreground mb-2 text-xs font-pixel">&gt; CURRENTLY</p>
                 <p className="text-xs leading-relaxed">
-                  R&D Intern at Clixsys, developing Matter-based smart home solutions and AI-powered mobile applications.
-                  Pursuing Deep Learning Specialization.
+                  R&D Engineer at Clixsys, developing electronics-based smart home solutions and AI-powered mobile applications. I'm now focused on sharpening my skills in PCB design and deploying fully functional ML/DL pipelines.
                 </p>
               </div>
             </div>

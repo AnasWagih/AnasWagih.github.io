@@ -23,8 +23,7 @@ const Experience = () => {
       period: "08/2025 – 09/2025",
       description: [
         "Hands-on embedded C programming for AVR: GPIO, ADC, timers, interrupts, USART, SPI, I2C.",
-        "Applied data structures & computer architecture concepts in virtual labs using Proteus and Microchip Studio.",
-        "Designed a full control system for 'Automotive' using relative sensors and modules - simulating their functions"
+        "Built a Dual-MCU STM32-Based Deadman Safety and Telemetry System for Electric Vehicles."
       ],
       color: "secondary"
     }
