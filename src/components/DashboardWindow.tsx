@@ -22,21 +22,47 @@ const PreviewContent = ({ id }: { id: string }) => {
     case "hero":
       return (
         <div className="space-y-3">
-          <div className="flex items-center gap-2">
-            <img src={pixelAvatar} alt="Avatar" className="w-8 h-8 pixelated border-2 border-primary" />
+          <motion.div 
+            className="flex items-center gap-2"
+            whileHover={{ scale: 1.05 }}
+          >
+            <motion.img 
+              src={pixelAvatar} 
+              alt="Avatar" 
+              className="w-8 h-8 pixelated border-2 border-primary"
+              animate={{ rotate: [0, 5, -5, 0] }}
+              transition={{ duration: 3, repeat: Infinity }}
+            />
             <div className="flex-1">
-              <div className="h-2 bg-primary/30 rounded mb-1" style={{ width: "80%" }} />
-              <div className="h-1.5 bg-secondary/30 rounded" style={{ width: "60%" }} />
+              <motion.div 
+                className="h-2 bg-gradient-to-r from-primary/40 to-secondary/40 rounded mb-1" 
+                style={{ width: "80%" }}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
+              <motion.div 
+                className="h-1.5 bg-gradient-to-r from-secondary/40 to-accent/40 rounded" 
+                style={{ width: "60%" }}
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ duration: 2, delay: 0.5, repeat: Infinity }}
+              />
             </div>
-          </div>
+          </motion.div>
           <div className="flex gap-1">
             {[1, 2, 3, 4].map((i) => (
               <motion.div
                 key={i}
-                className="flex-1 h-6 glass border border-primary/30 rounded"
+                className="flex-1 h-6 glass border border-primary/30 rounded relative overflow-hidden group cursor-pointer"
                 animate={{ scale: [1, 1.05, 1] }}
                 transition={{ delay: i * 0.2, duration: 1, repeat: Infinity }}
-              />
+                whileHover={{ scale: 1.1, borderColor: "hsl(var(--primary))" }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent"
+                  animate={{ opacity: [0, 0.5, 0] }}
+                  transition={{ delay: i * 0.3, duration: 2, repeat: Infinity }}
+                />
+              </motion.div>
             ))}
           </div>
         </div>
@@ -45,27 +71,60 @@ const PreviewContent = ({ id }: { id: string }) => {
     case "about":
       return (
         <div className="space-y-2">
-          <div className="flex items-start gap-2">
-            <GraduationCap className="w-4 h-4 text-secondary mt-0.5" />
+          <motion.div 
+            className="flex items-start gap-2 cursor-pointer"
+            whileHover={{ x: 3 }}
+          >
+            <motion.div
+              animate={{ rotate: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <GraduationCap className="w-4 h-4 text-secondary mt-0.5" />
+            </motion.div>
             <div className="flex-1 space-y-1">
-              <div className="h-1.5 bg-secondary/40 rounded" style={{ width: "90%" }} />
-              <div className="h-1.5 bg-secondary/30 rounded" style={{ width: "70%" }} />
+              <motion.div 
+                className="h-1.5 bg-gradient-to-r from-secondary/40 to-secondary/20 rounded" 
+                style={{ width: "90%" }}
+                whileHover={{ width: "95%" }}
+              />
+              <motion.div 
+                className="h-1.5 bg-secondary/30 rounded" 
+                style={{ width: "70%" }}
+                whileHover={{ width: "75%" }}
+              />
             </div>
-          </div>
-          <div className="flex items-start gap-2">
-            <MapPin className="w-4 h-4 text-accent mt-0.5" />
+          </motion.div>
+          <motion.div 
+            className="flex items-start gap-2 cursor-pointer"
+            whileHover={{ x: 3 }}
+          >
+            <motion.div
+              animate={{ y: [0, -2, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              <MapPin className="w-4 h-4 text-accent mt-0.5" />
+            </motion.div>
             <div className="flex-1 space-y-1">
-              <div className="h-1.5 bg-accent/40 rounded" style={{ width: "60%" }} />
-              <div className="h-1.5 bg-accent/30 rounded" style={{ width: "80%" }} />
+              <motion.div 
+                className="h-1.5 bg-gradient-to-r from-accent/40 to-accent/20 rounded" 
+                style={{ width: "60%" }}
+                whileHover={{ width: "65%" }}
+              />
+              <motion.div 
+                className="h-1.5 bg-accent/30 rounded" 
+                style={{ width: "80%" }}
+                whileHover={{ width: "85%" }}
+              />
             </div>
-          </div>
+          </motion.div>
           <div className="flex gap-1 flex-wrap mt-2">
             {["IOT", "AI", "EMBEDDED"].map((tag, i) => (
               <motion.span
                 key={tag}
-                className="text-[8px] px-2 py-0.5 glass border border-primary/30 font-pixel"
+                className="text-[8px] px-2 py-0.5 glass border border-primary/30 font-pixel cursor-pointer"
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ delay: i * 0.3, duration: 2, repeat: Infinity }}
+                whileHover={{ scale: 1.2, borderColor: "hsl(var(--primary))" }}
               >
                 {tag}
               </motion.span>
@@ -78,15 +137,45 @@ const PreviewContent = ({ id }: { id: string }) => {
       return (
         <div className="space-y-2">
           {[1, 2].map((i) => (
-            <div key={i} className="border-l-2 border-accent/50 pl-2 space-y-1">
-              <div className="h-1.5 bg-accent/40 rounded" style={{ width: "85%" }} />
-              <div className="h-1 bg-muted-foreground/20 rounded" style={{ width: "60%" }} />
+            <motion.div 
+              key={i} 
+              className="border-l-2 border-accent/50 pl-2 space-y-1 cursor-pointer relative group"
+              whileHover={{ x: 3, borderColor: "hsl(var(--accent))" }}
+              animate={{ borderLeftWidth: [2, 3, 2] }}
+              transition={{ duration: 2, delay: i * 0.5, repeat: Infinity }}
+            >
+              <motion.div 
+                className="h-1.5 bg-gradient-to-r from-accent/50 to-accent/20 rounded" 
+                style={{ width: "85%" }}
+                whileHover={{ width: "95%" }}
+              />
+              <motion.div 
+                className="h-1 bg-gradient-to-r from-muted-foreground/30 to-muted-foreground/10 rounded" 
+                style={{ width: "60%" }}
+                whileHover={{ width: "70%" }}
+              />
               <div className="flex gap-1">
                 {[1, 2, 3].map((j) => (
-                  <div key={j} className="h-1 w-1 bg-primary/30 rounded-full" />
+                  <motion.div 
+                    key={j} 
+                    className="h-1.5 w-1.5 bg-primary/40 rounded-full"
+                    animate={{ 
+                      scale: [1, 1.3, 1],
+                      opacity: [0.4, 1, 0.4]
+                    }}
+                    transition={{ 
+                      delay: i * 0.5 + j * 0.2, 
+                      duration: 1.5, 
+                      repeat: Infinity 
+                    }}
+                    whileHover={{ scale: 1.5 }}
+                  />
                 ))}
               </div>
-            </div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-accent/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+              />
+            </motion.div>
           ))}
         </div>
       );
@@ -97,12 +186,31 @@ const PreviewContent = ({ id }: { id: string }) => {
           {[1, 2, 3, 4].map((i) => (
             <motion.div
               key={i}
-              className="glass border border-primary/30 p-2 space-y-1"
-              whileHover={{ scale: 1.05 }}
+              className="glass border border-primary/30 p-2 space-y-1 cursor-pointer relative overflow-hidden group"
+              whileHover={{ scale: 1.1, y: -2 }}
+              animate={{ 
+                borderColor: ["hsl(var(--primary) / 0.3)", "hsl(var(--secondary) / 0.3)", "hsl(var(--primary) / 0.3)"]
+              }}
+              transition={{ duration: 3, delay: i * 0.5, repeat: Infinity }}
             >
-              <Code2 className="w-3 h-3 text-primary" />
-              <div className="h-1 bg-primary/30 rounded" />
-              <div className="h-1 bg-secondary/30 rounded" style={{ width: "70%" }} />
+              <motion.div
+                animate={{ rotate: [0, 360] }}
+                transition={{ duration: 4, delay: i * 0.3, repeat: Infinity, ease: "linear" }}
+              >
+                <Code2 className="w-3 h-3 text-primary" />
+              </motion.div>
+              <motion.div 
+                className="h-1 bg-gradient-to-r from-primary/40 to-primary/20 rounded"
+                whileHover={{ width: "100%" }}
+              />
+              <motion.div 
+                className="h-1 bg-gradient-to-r from-secondary/40 to-secondary/20 rounded" 
+                style={{ width: "70%" }}
+                whileHover={{ width: "80%" }}
+              />
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+              />
             </motion.div>
           ))}
         </div>
@@ -115,20 +223,30 @@ const PreviewContent = ({ id }: { id: string }) => {
             { icon: Code2, color: "primary", count: 4 },
             { icon: Cpu, color: "secondary", count: 5 }
           ].map((row, i) => (
-            <div key={i} className="flex items-center gap-1">
-              <row.icon className={`w-3 h-3 text-${row.color}`} />
+            <motion.div 
+              key={i} 
+              className="flex items-center gap-1 cursor-pointer"
+              whileHover={{ x: 5 }}
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, delay: i * 0.5, repeat: Infinity }}
+              >
+                <row.icon className={`w-3 h-3 text-${row.color}`} />
+              </motion.div>
               <div className="flex gap-1 flex-wrap flex-1">
                 {Array.from({ length: row.count }).map((_, j) => (
                   <motion.div
                     key={j}
-                    className={`h-1.5 bg-${row.color}/30 rounded`}
+                    className={`h-1.5 bg-gradient-to-r from-${row.color}/40 to-${row.color}/20 rounded cursor-pointer`}
                     style={{ width: `${15 + j * 5}%` }}
                     animate={{ opacity: [0.3, 1, 0.3] }}
                     transition={{ delay: j * 0.2, duration: 2, repeat: Infinity }}
+                    whileHover={{ height: 8, opacity: 1 }}
                   />
                 ))}
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
       );
@@ -139,15 +257,35 @@ const PreviewContent = ({ id }: { id: string }) => {
           {[1, 2, 3].map((i) => (
             <motion.div
               key={i}
-              className="flex items-center gap-2 glass border border-accent/30 p-1.5"
+              className="flex items-center gap-2 glass border border-accent/30 p-2 cursor-pointer relative overflow-hidden group"
               animate={{ x: [0, 2, 0] }}
               transition={{ delay: i * 0.3, duration: 2, repeat: Infinity }}
+              whileHover={{ scale: 1.05, x: 5, borderColor: "hsl(var(--accent))" }}
             >
-              <Award className="w-3 h-3 text-accent" />
+              <motion.div
+                animate={{ 
+                  rotate: [0, 360],
+                  scale: [1, 1.1, 1]
+                }}
+                transition={{ duration: 3, delay: i * 0.4, repeat: Infinity }}
+              >
+                <Award className="w-4 h-4 text-accent" />
+              </motion.div>
               <div className="flex-1 space-y-0.5">
-                <div className="h-1 bg-accent/40 rounded" style={{ width: "80%" }} />
-                <div className="h-1 bg-accent/20 rounded" style={{ width: "50%" }} />
+                <motion.div 
+                  className="h-1 bg-gradient-to-r from-accent/50 to-accent/20 rounded" 
+                  style={{ width: "80%" }}
+                  whileHover={{ width: "90%" }}
+                />
+                <motion.div 
+                  className="h-1 bg-accent/20 rounded" 
+                  style={{ width: "50%" }}
+                  whileHover={{ width: "60%" }}
+                />
               </div>
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-accent/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+              />
             </motion.div>
           ))}
         </div>
@@ -155,23 +293,44 @@ const PreviewContent = ({ id }: { id: string }) => {
     
     case "contact":
       return (
-        <div className="space-y-2">
+        <div className="space-y-3">
           <motion.div
-            className="glass border-2 border-primary/50 p-2 text-center"
+            className="glass border-2 border-primary/50 p-3 text-center cursor-pointer relative overflow-hidden group"
             animate={{ scale: [1, 1.05, 1] }}
             transition={{ duration: 2, repeat: Infinity }}
+            whileHover={{ scale: 1.1, borderColor: "hsl(var(--primary))" }}
           >
-            <Send className="w-4 h-4 text-primary mx-auto mb-1" />
-            <div className="h-1 bg-primary/40 rounded mx-auto" style={{ width: "80%" }} />
+            <motion.div
+              animate={{ 
+                rotate: [0, 15, -15, 0],
+                y: [0, -2, 0]
+              }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
+              <Send className="w-5 h-5 text-primary mx-auto mb-2" />
+            </motion.div>
+            <motion.div 
+              className="h-1.5 bg-gradient-to-r from-primary/50 to-primary/20 rounded mx-auto" 
+              style={{ width: "80%" }}
+              whileHover={{ width: "90%" }}
+            />
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+            />
           </motion.div>
           <div className="flex gap-1">
             {[1, 2, 3].map((i) => (
               <motion.div
                 key={i}
-                className="flex-1 h-4 glass border border-secondary/30 rounded"
+                className="flex-1 h-5 glass border border-secondary/30 rounded cursor-pointer relative overflow-hidden group"
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ delay: i * 0.2, duration: 1.5, repeat: Infinity }}
-              />
+                whileHover={{ scale: 1.1, y: -2, borderColor: "hsl(var(--secondary))" }}
+              >
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-t from-secondary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"
+                />
+              </motion.div>
             ))}
           </div>
         </div>
