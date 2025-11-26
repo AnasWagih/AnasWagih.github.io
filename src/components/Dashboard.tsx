@@ -38,12 +38,20 @@ const Dashboard = ({ onSelectSection, selectedSection }: DashboardProps) => {
       size: "medium"
     },
     {
+      id: "contact",
+      title: "CONTACT",
+      icon: Mail,
+      preview: "Get in touch • Let's build something amazing",
+      color: "primary",
+      size: "medium"
+    },
+    {
       id: "experience",
       title: "EXPERIENCE",
       icon: Briefcase,
       preview: "R&D Engineer • Embedded Systems • PCB Design",
       color: "accent",
-      size: "medium"
+      size: "large"
     },
     {
       id: "projects",
@@ -67,15 +75,7 @@ const Dashboard = ({ onSelectSection, selectedSection }: DashboardProps) => {
       icon: Award,
       preview: "Deep Learning • AWS • PCB Design",
       color: "accent",
-      size: "small"
-    },
-    {
-      id: "contact",
-      title: "CONTACT",
-      icon: Mail,
-      preview: "Get in touch • Let's build something amazing",
-      color: "primary",
-      size: "small"
+      size: "medium"
     }
   ];
 
