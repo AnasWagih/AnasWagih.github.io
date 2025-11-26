@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "lucide-react";
+import { LucideIcon, MapPin, GraduationCap, Code2, Cpu, Award, Send } from "lucide-react";
 import { useRipple } from "@/hooks/useRipple";
+import pixelAvatar from "@/assets/pixel-avatar.png";
 
 interface WindowProps {
   window: {
@@ -15,6 +16,171 @@ interface WindowProps {
   onClick: () => void;
   isSelected: boolean;
 }
+
+const PreviewContent = ({ id }: { id: string }) => {
+  switch (id) {
+    case "hero":
+      return (
+        <div className="space-y-3">
+          <div className="flex items-center gap-2">
+            <img src={pixelAvatar} alt="Avatar" className="w-8 h-8 pixelated border-2 border-primary" />
+            <div className="flex-1">
+              <div className="h-2 bg-primary/30 rounded mb-1" style={{ width: "80%" }} />
+              <div className="h-1.5 bg-secondary/30 rounded" style={{ width: "60%" }} />
+            </div>
+          </div>
+          <div className="flex gap-1">
+            {[1, 2, 3, 4].map((i) => (
+              <motion.div
+                key={i}
+                className="flex-1 h-6 glass border border-primary/30 rounded"
+                animate={{ scale: [1, 1.05, 1] }}
+                transition={{ delay: i * 0.2, duration: 1, repeat: Infinity }}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    
+    case "about":
+      return (
+        <div className="space-y-2">
+          <div className="flex items-start gap-2">
+            <GraduationCap className="w-4 h-4 text-secondary mt-0.5" />
+            <div className="flex-1 space-y-1">
+              <div className="h-1.5 bg-secondary/40 rounded" style={{ width: "90%" }} />
+              <div className="h-1.5 bg-secondary/30 rounded" style={{ width: "70%" }} />
+            </div>
+          </div>
+          <div className="flex items-start gap-2">
+            <MapPin className="w-4 h-4 text-accent mt-0.5" />
+            <div className="flex-1 space-y-1">
+              <div className="h-1.5 bg-accent/40 rounded" style={{ width: "60%" }} />
+              <div className="h-1.5 bg-accent/30 rounded" style={{ width: "80%" }} />
+            </div>
+          </div>
+          <div className="flex gap-1 flex-wrap mt-2">
+            {["IOT", "AI", "EMBEDDED"].map((tag, i) => (
+              <motion.span
+                key={tag}
+                className="text-[8px] px-2 py-0.5 glass border border-primary/30 font-pixel"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ delay: i * 0.3, duration: 2, repeat: Infinity }}
+              >
+                {tag}
+              </motion.span>
+            ))}
+          </div>
+        </div>
+      );
+    
+    case "experience":
+      return (
+        <div className="space-y-2">
+          {[1, 2].map((i) => (
+            <div key={i} className="border-l-2 border-accent/50 pl-2 space-y-1">
+              <div className="h-1.5 bg-accent/40 rounded" style={{ width: "85%" }} />
+              <div className="h-1 bg-muted-foreground/20 rounded" style={{ width: "60%" }} />
+              <div className="flex gap-1">
+                {[1, 2, 3].map((j) => (
+                  <div key={j} className="h-1 w-1 bg-primary/30 rounded-full" />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    
+    case "projects":
+      return (
+        <div className="grid grid-cols-2 gap-1.5">
+          {[1, 2, 3, 4].map((i) => (
+            <motion.div
+              key={i}
+              className="glass border border-primary/30 p-2 space-y-1"
+              whileHover={{ scale: 1.05 }}
+            >
+              <Code2 className="w-3 h-3 text-primary" />
+              <div className="h-1 bg-primary/30 rounded" />
+              <div className="h-1 bg-secondary/30 rounded" style={{ width: "70%" }} />
+            </motion.div>
+          ))}
+        </div>
+      );
+    
+    case "skills":
+      return (
+        <div className="space-y-2">
+          {[
+            { icon: Code2, color: "primary", count: 4 },
+            { icon: Cpu, color: "secondary", count: 5 }
+          ].map((row, i) => (
+            <div key={i} className="flex items-center gap-1">
+              <row.icon className={`w-3 h-3 text-${row.color}`} />
+              <div className="flex gap-1 flex-wrap flex-1">
+                {Array.from({ length: row.count }).map((_, j) => (
+                  <motion.div
+                    key={j}
+                    className={`h-1.5 bg-${row.color}/30 rounded`}
+                    style={{ width: `${15 + j * 5}%` }}
+                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    transition={{ delay: j * 0.2, duration: 2, repeat: Infinity }}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      );
+    
+    case "certifications":
+      return (
+        <div className="space-y-1.5">
+          {[1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="flex items-center gap-2 glass border border-accent/30 p-1.5"
+              animate={{ x: [0, 2, 0] }}
+              transition={{ delay: i * 0.3, duration: 2, repeat: Infinity }}
+            >
+              <Award className="w-3 h-3 text-accent" />
+              <div className="flex-1 space-y-0.5">
+                <div className="h-1 bg-accent/40 rounded" style={{ width: "80%" }} />
+                <div className="h-1 bg-accent/20 rounded" style={{ width: "50%" }} />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      );
+    
+    case "contact":
+      return (
+        <div className="space-y-2">
+          <motion.div
+            className="glass border-2 border-primary/50 p-2 text-center"
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <Send className="w-4 h-4 text-primary mx-auto mb-1" />
+            <div className="h-1 bg-primary/40 rounded mx-auto" style={{ width: "80%" }} />
+          </motion.div>
+          <div className="flex gap-1">
+            {[1, 2, 3].map((i) => (
+              <motion.div
+                key={i}
+                className="flex-1 h-4 glass border border-secondary/30 rounded"
+                animate={{ opacity: [0.5, 1, 0.5] }}
+                transition={{ delay: i * 0.2, duration: 1.5, repeat: Infinity }}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    
+    default:
+      return null;
+  }
+};
 
 const DashboardWindow = ({ window, index, onClick, isSelected }: WindowProps) => {
   const createRipple = useRipple();
@@ -67,10 +233,13 @@ const DashboardWindow = ({ window, index, onClick, isSelected }: WindowProps) =>
         </div>
 
         {/* Preview content */}
-        <div className="space-y-2">
-          <p className="text-xs font-sans text-muted-foreground leading-relaxed line-clamp-2">
+        <div className="space-y-3">
+          <p className="text-[10px] font-pixel text-muted-foreground leading-relaxed uppercase">
             {window.preview}
           </p>
+          <div className="mt-3">
+            <PreviewContent id={window.id} />
+          </div>
         </div>
 
         {/* Hover glow effect */}
