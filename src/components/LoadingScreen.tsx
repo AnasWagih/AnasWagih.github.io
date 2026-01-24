@@ -79,7 +79,7 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
                 : '0 0 20px hsl(var(--primary) / 0.5)'
             }}
           >
-            AHMED ZROUQI
+            ANAS WAGIH
           </h1>
           
           {/* Subtitle */}
@@ -88,7 +88,7 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
               showText ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            R&D ENGINEER
+            ECE ENGINEER
           </p>
         </div>
 
