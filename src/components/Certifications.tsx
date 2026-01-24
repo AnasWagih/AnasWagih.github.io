@@ -19,7 +19,7 @@ const Certifications = () => {
       issuer: "DeepLearning.AI",
       courses: "5 Courses",
       link: "",
-      status: "In Progress"
+      status: "Completed"
     },
     {
       title: "Advanced Embedded Systems",
