@@ -28,27 +28,28 @@ const Navigation = () => {
     { label: "Experience", id: "experience" },
     { label: "Projects", id: "projects" },
     { label: "Skills", id: "skills" },
-    { label: "Certifications", id: "certifications" },
+    { label: "Certs", id: "certifications" },
     { label: "Contact", id: "contact" }
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-6">
+    <nav className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8 pt-4">
       <div
-        className={`max-w-6xl mx-auto transition-all duration-500 ${
-          isScrolled ? "glass-strong border-4 border-primary" : "glass border-4 border-secondary"
+        className={`max-w-5xl mx-auto transition-all duration-300 ${
+          isScrolled ? "glass-strong" : "glass"
         }`}
       >
-        <div className="flex items-center justify-between h-20 px-6 sm:px-8 lg:px-10">
+        <div className="flex items-center justify-between h-14 px-4 sm:px-6">
+          {/* Logo */}
           <button
             onClick={() => scrollToSection("hero")}
-            className="text-xl font-pixel gradient-text hover:scale-110 transition-all tracking-tight"
+            className="text-lg font-pixel gradient-text hover:scale-105 transition-all"
           >
             &lt;AMW/&gt;
           </button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -56,7 +57,7 @@ const Navigation = () => {
                   createRipple(e);
                   scrollToSection(item.id);
                 }}
-                className="px-5 py-2.5 glass border-2 border-secondary hover:border-primary transition-all font-sans text-base hover:scale-110 glow-on-hover relative overflow-hidden"
+                className="px-3 py-2 font-sans text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all relative overflow-hidden"
               >
                 {item.label}
               </button>
@@ -67,18 +68,18 @@ const Navigation = () => {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden glass border-2 border-primary hover:border-accent"
+            className="md:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </Button>
         </div>
       </div>
 
       {/* Mobile Navigation */}
       {isMobileMenuOpen && (
-        <div className="md:hidden mt-2 max-w-6xl mx-auto glass-strong border-4 border-primary">
-          <div className="px-6 py-6 space-y-2">
+        <div className="md:hidden mt-2 max-w-5xl mx-auto glass-strong">
+          <div className="px-4 py-4 space-y-1">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -86,7 +87,7 @@ const Navigation = () => {
                   createRipple(e);
                   scrollToSection(item.id);
                 }}
-                className="block w-full text-left px-5 py-3.5 glass border-2 border-secondary hover:border-accent transition-all font-sans text-base hover:scale-105 glow-on-hover relative overflow-hidden"
+                className="block w-full text-left px-4 py-3 font-sans text-sm text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all"
               >
                 {item.label}
               </button>
