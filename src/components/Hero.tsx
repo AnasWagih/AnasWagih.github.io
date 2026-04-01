@@ -88,10 +88,11 @@ const Hero = () => {
             { href: "mailto:anaswagih35@gmail.com", icon: Mail, label: "Email" },
             { href: "tel:+201020065576", icon: Phone, label: "Call" },
             { href: "/CV.pdf", icon: FileDown, label: "CV", download: true },
-          ].map((link, i) => (
+          ].map((link: any, i) => (
             <a
               key={link.label}
               href={link.href}
+              download={link.download ? "Anas_Wagih_CV.pdf" : undefined}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
               className="glass px-4 py-2 flex items-center gap-2 hover:scale-105 transition-all group"
