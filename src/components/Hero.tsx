@@ -87,6 +87,7 @@ const Hero = () => {
             { href: "https://www.linkedin.com/in/anas-wagih-9423a7232/", icon: Linkedin, label: "LinkedIn" },
             { href: "mailto:anaswagih35@gmail.com", icon: Mail, label: "Email" },
             { href: "tel:+201020065576", icon: Phone, label: "Call" },
+            { href: "/CV.pdf", icon: FileDown, label: "CV", download: true },
           ].map((link, i) => (
             <a
               key={link.label}
