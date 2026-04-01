@@ -46,12 +46,12 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
       }`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <InteractiveCard className="gradient-border p-8 interactive-hover group">
-        <h3 className="text-lg font-pixel mb-4 group-hover:gradient-text transition-all leading-relaxed">
+      <InteractiveCard className="gradient-border p-5 sm:p-8 interactive-hover group h-full">
+        <h3 className="text-sm sm:text-lg font-pixel mb-4 group-hover:gradient-text transition-all leading-relaxed break-words">
           {project.title}
         </h3>
         
-        <p className="text-muted-foreground leading-relaxed mb-6 font-sans text-base">
+        <p className="text-muted-foreground leading-relaxed mb-6 font-sans text-sm sm:text-base break-words">
           {project.description}
         </p>
         
@@ -59,7 +59,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           {project.tags.map((tag: string, i: number) => (
             <span
               key={i}
-              className="glass px-3 py-1 border-2 border-primary text-xs font-sans hover:scale-110 hover:border-accent transition-all cursor-default"
+              className="glass px-2 sm:px-3 py-1 border-2 border-primary text-xs font-sans hover:scale-110 hover:border-accent transition-all cursor-default"
               onClick={(e) => createRipple(e)}
             >
               {tag}
@@ -67,7 +67,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
           ))}
         </div>
         
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
           <Button
             size="sm"
             variant="outline"
@@ -76,7 +76,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             asChild
           >
             <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <Github className="w-4 h-4 mr-2" />
+              <Github className="w-4 h-4 mr-2 flex-shrink-0" />
               CODE
             </a>
           </Button>
@@ -87,7 +87,7 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
             asChild
           >
             <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <ExternalLink className="w-4 h-4 mr-2" />
+              <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
               INFO
             </a>
           </Button>
@@ -98,13 +98,13 @@ const ProjectCard = ({ project, index }: { project: any; index: number }) => {
 };
 
   return (
-    <section id="projects" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-20 px-4 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-pixel mb-12 text-center animate-fade-in-up">
           <span className="gradient-text">&gt;&gt; PROJECTS</span>
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project, index) => (
             <ProjectCard key={index} project={project} index={index} />
           ))}

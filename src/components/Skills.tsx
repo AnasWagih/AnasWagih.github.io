@@ -32,13 +32,13 @@ const Skills = () => {
   ];
 
   return (
-    <section id="skills" className="py-20 px-4">
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-pixel mb-12 text-center">
+    <section id="skills" className="py-20 px-4 overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-pixel mb-12 text-center">
           <span className="gradient-text">&gt;&gt; SKILLS & TECH</span>
         </h2>
         
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {skillCategories.map((category, index) => {
             const Icon = category.icon;
             const SkillCategory = () => {
@@ -47,30 +47,30 @@ const Skills = () => {
               return (
                 <div
                   ref={ref}
-                  className={`glass-strong p-8 interactive-hover group transition-all duration-700 relative ${
+                  className={`glass-strong p-5 sm:p-8 interactive-hover group transition-all duration-700 relative ${
                     isVisible ? 'reveal-scale opacity-100' : 'opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
                   {/* Pixel corners */}
-                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary" />
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-secondary" />
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-accent" />
-                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary" />
+                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary hidden sm:block" />
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-secondary hidden sm:block" />
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-accent hidden sm:block" />
+                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary hidden sm:block" />
                   
                   <div className="relative z-10">
                     <div className="flex items-center gap-3 mb-6">
-                      <div className={`p-3 border-2 border-${category.color} bg-${category.color}/20 transition-transform hover:scale-110`}>
-                        <Icon className={`w-6 h-6 text-${category.color}`} />
+                      <div className={`p-2 sm:p-3 border-2 border-${category.color} bg-${category.color}/20 transition-transform hover:scale-110 flex-shrink-0`}>
+                        <Icon className={`w-5 sm:w-6 h-5 sm:h-6 text-${category.color}`} />
                       </div>
-                      <h3 className="text-lg font-pixel">{category.title}</h3>
+                      <h3 className="text-sm sm:text-lg font-pixel">{category.title}</h3>
                     </div>
                     
                     <div className="flex flex-wrap gap-2">
                       {category.skills.map((skill, i) => (
                         <span
                           key={i}
-                          className="glass px-3 py-2 text-xs font-pixel hover:scale-110 hover:bg-primary/20 transition-all cursor-default relative overflow-hidden border-2 border-border"
+                          className="glass px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-pixel hover:scale-110 hover:bg-primary/20 transition-all cursor-default relative overflow-hidden border-2 border-border"
                           onClick={(e) => createRipple(e)}
                           style={{
                             animationDelay: `${i * 50}ms`,

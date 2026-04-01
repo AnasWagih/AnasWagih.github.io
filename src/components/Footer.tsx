@@ -2,12 +2,12 @@ import { Heart } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="py-8 px-4 border-t-4 border-border relative">
+    <footer className="py-8 px-4 border-t-4 border-border relative overflow-hidden">
       {/* Pixel decorations */}
-      <div className="absolute top-0 left-1/4 w-4 h-4 bg-primary transform -translate-y-1/2" />
-      <div className="absolute top-0 right-1/4 w-4 h-4 bg-secondary transform -translate-y-1/2" />
+      <div className="absolute top-0 left-1/4 w-4 h-4 bg-primary transform -translate-y-1/2 hidden sm:block" />
+      <div className="absolute top-0 right-1/4 w-4 h-4 bg-secondary transform -translate-y-1/2 hidden sm:block" />
       
-      <div className="max-w-6xl mx-auto text-center">
+      <div className="w-full max-w-6xl mx-auto text-center">
         <p className="text-muted-foreground flex items-center justify-center gap-2 flex-wrap font-pixel text-xs">
           <span>&gt;&gt; © {new Date().getFullYear()} ANAS M. WAGIH</span>
         </p>
