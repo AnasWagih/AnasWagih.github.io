@@ -45,18 +45,18 @@ const Certifications = () => {
   ];
 
   return (
-    <section id="certifications" className="py-20 px-4 relative">
-      <div className="max-w-6xl mx-auto relative z-10">
+    <section id="certifications" className="py-20 px-4 relative overflow-hidden">
+      <div className="w-full max-w-6xl mx-auto relative z-10">
         <h2 
           ref={headerRef}
-          className={`text-3xl md:text-4xl font-pixel mb-12 text-center transition-all duration-1000 ${
+          className={`text-2xl sm:text-3xl md:text-4xl font-pixel mb-12 text-center transition-all duration-1000 ${
             headerVisible ? 'reveal-scale opacity-100' : 'opacity-0'
           }`}
         >
           <span className="gradient-text">&gt;&gt; ACHIEVEMENTS</span>
         </h2>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {certifications.map((cert, index) => {
             const CertCard = () => {
               const { ref, isVisible } = useScrollReveal();
@@ -64,25 +64,25 @@ const Certifications = () => {
               return (
                 <div
                   ref={ref}
-                  className={`glass-strong p-6 interactive-hover group transition-all duration-1000 relative ${
+                  className={`glass-strong p-5 sm:p-6 interactive-hover group transition-all duration-1000 relative ${
                     isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                   onClick={(e) => createRipple(e)}
                 >
                   {/* Pixel corners */}
-                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary" />
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent" />
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-secondary" />
-                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary" />
+                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary hidden sm:block" />
+                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent hidden sm:block" />
+                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-secondary hidden sm:block" />
+                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary hidden sm:block" />
                   
                   <div className="relative z-10">
                     <div className="flex items-start gap-3 mb-4">
-                      <div className="p-2 border-2 border-primary bg-primary/20 mt-1">
-                        <Award className="w-5 h-5 text-primary" />
+                      <div className="p-2 border-2 border-primary bg-primary/20 mt-1 flex-shrink-0">
+                        <Award className="w-4 sm:w-5 h-4 sm:h-5 text-primary" />
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-pixel text-sm mb-2 leading-tight">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="font-pixel text-xs sm:text-sm mb-2 leading-tight break-words">
                           {cert.title}
                         </h3>
                         <p className="text-xs text-secondary font-pixel mb-1">{cert.issuer}</p>
@@ -90,9 +90,9 @@ const Certifications = () => {
                       </div>
                     </div>
                     
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t-2 border-border">
+                    <div className="flex items-center justify-between mt-4 pt-4 border-t-2 border-border gap-2">
                       <span
-                        className={`text-xs px-3 py-1 font-pixel border-2 ${
+                        className={`text-xs px-2 sm:px-3 py-1 font-pixel border-2 whitespace-nowrap ${
                           cert.status === "Completed"
                             ? "bg-primary/20 text-primary border-primary"
                             : "bg-accent/20 text-accent border-accent"
@@ -104,7 +104,7 @@ const Certifications = () => {
                         <Button
                           size="sm"
                           variant="ghost"
-                          className="hover:scale-110 transition-transform p-2 h-auto"
+                          className="hover:scale-110 transition-transform p-2 h-auto flex-shrink-0"
                           asChild
                         >
                           <a
@@ -116,7 +116,7 @@ const Certifications = () => {
                           </a>
                         </Button>
                       ) : (
-                        <div className="opacity-50 p-2">
+                        <div className="opacity-50 p-2 flex-shrink-0">
                           <ExternalLink className="w-4 h-4" />
                         </div>
                       )}

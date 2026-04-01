@@ -16,7 +16,7 @@ const Contact = () => {
       {/* Section glow */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-50" />
       
-      <div className="max-w-4xl mx-auto relative z-10">
+      <div className="w-full max-w-4xl mx-auto relative z-10">
         <h2 
           ref={headerRef}
           className={`text-2xl md:text-3xl font-pixel mb-6 text-center transition-all duration-1000 ${
@@ -24,31 +24,31 @@ const Contact = () => {
           }`}
         >
           <span className="gradient-text inline-flex items-center gap-3">
-            <MessageCircle className="w-8 h-8 animate-pixel-bounce" />
+            <MessageCircle className="w-6 sm:w-8 h-6 sm:h-8 animate-pixel-bounce flex-shrink-0" />
             &gt;&gt; CONNECT
           </span>
         </h2>
         
-        <p className="text-center text-muted-foreground font-sans text-base mb-12 max-w-2xl mx-auto">
+        <p className="text-center text-muted-foreground font-sans text-sm sm:text-base mb-12 max-w-2xl mx-auto">
           &gt; Open to new projects and opportunities
         </p>
         
-        <div className="glass-strong rounded-3xl p-8 md:p-12 border border-primary/10 glow-on-hover">
-          <div className="grid md:grid-cols-2 gap-8 mb-8">
+        <div className="glass-strong p-4 sm:p-8 md:p-12 border border-primary/10 glow-on-hover">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
             <a
               ref={magnetic1.ref}
               onMouseMove={magnetic1.handleMouseMove}
               onMouseLeave={magnetic1.handleMouseLeave}
               href="mailto:anaswagih35@gmail.com"
-              className="flex items-center gap-4 p-6 glass rounded-2xl interactive-hover glow-on-hover group border border-white/10 hover:border-primary/30 magnetic-hover relative overflow-hidden"
+              className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 glass interactive-hover glow-on-hover group border border-border hover:border-primary/30 magnetic-hover relative overflow-hidden"
               onClick={(e) => createRipple(e)}
             >
-              <div className="p-4 rounded-xl bg-primary/20 group-hover:bg-primary/40 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Mail className="w-7 h-7 text-primary" />
+              <div className="p-3 sm:p-4 bg-primary/20 group-hover:bg-primary/40 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                <Mail className="w-5 sm:w-7 h-5 sm:h-7 text-primary" />
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1 font-medium">Email</p>
-                <p className="font-bold text-lg">anaswagih35@gmail.com</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">Email</p>
+                <p className="font-bold text-sm sm:text-base md:text-lg truncate">anaswagih35@gmail.com</p>
               </div>
             </a>
             
@@ -57,15 +57,15 @@ const Contact = () => {
               onMouseMove={magnetic2.handleMouseMove}
               onMouseLeave={magnetic2.handleMouseLeave}
               href="tel:+201020065576"
-              className="flex items-center gap-4 p-6 glass rounded-2xl interactive-hover glow-on-hover group border border-white/10 hover:border-secondary/30 magnetic-hover relative overflow-hidden"
+              className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 glass interactive-hover glow-on-hover group border border-border hover:border-secondary/30 magnetic-hover relative overflow-hidden"
               onClick={(e) => createRipple(e)}
             >
-              <div className="p-4 rounded-xl bg-secondary/20 group-hover:bg-secondary/40 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Phone className="w-7 h-7 text-secondary" />
+              <div className="p-3 sm:p-4 bg-secondary/20 group-hover:bg-secondary/40 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                <Phone className="w-5 sm:w-7 h-5 sm:h-7 text-secondary" />
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1 font-medium">Phone</p>
-                <p className="font-bold text-lg">+20 102 006 5576</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">Phone</p>
+                <p className="font-bold text-sm sm:text-base md:text-lg truncate">+20 102 006 5576</p>
               </div>
             </a>
             
@@ -76,15 +76,15 @@ const Contact = () => {
               href="https://www.linkedin.com/in/anas-wagih-9423a7232/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-6 glass rounded-2xl interactive-hover glow-on-hover group border border-white/10 hover:border-accent/30 magnetic-hover relative overflow-hidden"
+              className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 glass interactive-hover glow-on-hover group border border-border hover:border-accent/30 magnetic-hover relative overflow-hidden"
               onClick={(e) => createRipple(e)}
             >
-              <div className="p-4 rounded-xl bg-accent/20 group-hover:bg-accent/40 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Linkedin className="w-7 h-7 text-accent" />
+              <div className="p-3 sm:p-4 bg-accent/20 group-hover:bg-accent/40 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                <Linkedin className="w-5 sm:w-7 h-5 sm:h-7 text-accent" />
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1 font-medium">LinkedIn</p>
-                <p className="font-bold text-lg">AnasWagih</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">LinkedIn</p>
+                <p className="font-bold text-sm sm:text-base md:text-lg truncate">AnasWagih</p>
               </div>
             </a>
             
@@ -95,30 +95,30 @@ const Contact = () => {
               href="https://github.com/AnasWagih25"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 p-6 glass rounded-2xl interactive-hover glow-on-hover group border border-white/10 hover:border-primary/30 magnetic-hover relative overflow-hidden"
+              className="flex items-center gap-3 sm:gap-4 p-4 sm:p-6 glass interactive-hover glow-on-hover group border border-border hover:border-primary/30 magnetic-hover relative overflow-hidden"
               onClick={(e) => createRipple(e)}
             >
-              <div className="p-4 rounded-xl bg-primary/20 group-hover:bg-primary/40 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
-                <Github className="w-7 h-7 text-primary" />
+              <div className="p-3 sm:p-4 bg-primary/20 group-hover:bg-primary/40 transition-all duration-300 group-hover:scale-110 flex-shrink-0">
+                <Github className="w-5 sm:w-7 h-5 sm:h-7 text-primary" />
               </div>
-              <div>
-                <p className="text-sm text-muted-foreground mb-1 font-medium">GitHub</p>
-                <p className="font-bold text-lg">AnasWagih25</p>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-1 font-medium">GitHub</p>
+                <p className="font-bold text-sm sm:text-base md:text-lg truncate">AnasWagih25</p>
               </div>
             </a>
           </div>
           
-          <div className="flex items-center gap-4 p-4 glass rounded-2xl">
-            <div className="p-3 rounded-xl bg-secondary/20">
-              <MapPin className="w-6 h-6 text-secondary" />
+          <div className="flex items-center gap-3 sm:gap-4 p-4 glass">
+            <div className="p-3 bg-secondary/20 flex-shrink-0">
+              <MapPin className="w-5 sm:w-6 h-5 sm:h-6 text-secondary" />
             </div>
-            <div>
-              <p className="text-sm text-muted-foreground mb-1">Location</p>
-              <p className="font-medium">Cairo, Egypt</p>
+            <div className="min-w-0">
+              <p className="text-xs sm:text-sm text-muted-foreground mb-1">Location</p>
+              <p className="font-medium text-sm sm:text-base">Cairo, Egypt</p>
             </div>
           </div>
           
-          <div className="mt-8 text-center">
+          <div className="mt-6 sm:mt-8 text-center">
             <Button
               asChild
               size="lg"
