@@ -46,7 +46,7 @@ const Hero = () => {
             subtitleVisible ? 'reveal-up opacity-100' : 'opacity-0'
           }`}
         >
-          Electronics & Embedded Systems Engineer
+          Electronics & Communications Engineer
         </h2>
         
         {/* CTA Buttons */}
