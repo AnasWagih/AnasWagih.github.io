@@ -85,9 +85,9 @@ const Hero = () => {
           {[
             { href: "https://github.com/AnasWagih25", icon: Github, label: "GitHub" },
             { href: "https://www.linkedin.com/in/anas-wagih-9423a7232/", icon: Linkedin, label: "LinkedIn" },
+            { href: "/CV.pdf", icon: FileDown, label: "CV", download: true },
             { href: "mailto:anaswagih35@gmail.com", icon: Mail, label: "Email" },
             { href: "tel:+201020065576", icon: Phone, label: "Call" },
-            { href: "/CV.pdf", icon: FileDown, label: "CV", download: true },
           ].map((link: any, i) => (
             <a
               key={link.label}
@@ -95,7 +95,7 @@ const Hero = () => {
               download={link.download ? "Anas_Wagih_CV.pdf" : undefined}
               target={link.href.startsWith("http") ? "_blank" : undefined}
               rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-              className="glass px-4 py-2 flex items-center gap-2 hover:scale-105 transition-all group"
+              className="glass px-5 py-2.5 flex items-center gap-2 hover:scale-105 transition-all group min-w-[100px] justify-center"
               onClick={(e) => createRipple(e)}
               style={{ animationDelay: `${i * 100}ms` }}
             >
