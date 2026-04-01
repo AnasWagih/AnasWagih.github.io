@@ -88,7 +88,7 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
               showText ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            ECE ENGINEER
+            ELECTRONICS & COMMUNICATIONS ENGINEER
           </p>
         </div>
 
