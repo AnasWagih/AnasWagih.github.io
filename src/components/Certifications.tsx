@@ -1,11 +1,10 @@
 import { Award, ExternalLink } from "lucide-react";
 import { Button } from "./ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { useRipple } from "@/hooks/useRipple";
+import PixelWindow from "./PixelWindow";
 
 const Certifications = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
-  const createRipple = useRipple();
   const certifications = [
     {
       title: "Machine Learning",
@@ -64,64 +63,55 @@ const Certifications = () => {
               return (
                 <div
                   ref={ref}
-                  className={`glass-strong p-5 sm:p-6 interactive-hover group transition-all duration-1000 relative ${
+                  className={`transition-all duration-1000 ${
                     isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
-                  onClick={(e) => createRipple(e)}
                 >
-                  {/* Pixel corners */}
-                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary hidden sm:block" />
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-accent hidden sm:block" />
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-secondary hidden sm:block" />
-                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary hidden sm:block" />
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-start gap-3 mb-4">
-                      <div className="p-2 border-2 border-primary bg-primary/20 mt-1 flex-shrink-0">
-                        <Award className="w-4 sm:w-5 h-4 sm:h-5 text-primary" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-pixel text-xs sm:text-sm mb-2 leading-tight break-words">
-                          {cert.title}
-                        </h3>
-                        <p className="text-xs text-secondary font-pixel mb-1">{cert.issuer}</p>
-                        {cert.courses && <p className="text-xs text-muted-foreground">{cert.courses}</p>}
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between mt-4 pt-4 border-t-2 border-border gap-2">
-                      <span
-                        className={`text-xs px-2 sm:px-3 py-1 font-pixel border-2 whitespace-nowrap ${
-                          cert.status === "Completed"
-                            ? "bg-primary/20 text-primary border-primary"
-                            : "bg-accent/20 text-accent border-accent"
-                        }`}
-                      >
-                        {cert.status === "Completed" ? "✓ DONE" : "⚡ WIP"}
-                      </span>
-                      {cert.link ? (
-                        <Button
-                          size="sm"
-                          variant="ghost"
-                          className="hover:scale-110 transition-transform p-2 h-auto flex-shrink-0"
-                          asChild
-                        >
-                          <a
-                            href={cert.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        </Button>
-                      ) : (
-                        <div className="opacity-50 p-2 flex-shrink-0">
-                          <ExternalLink className="w-4 h-4" />
+                  <PixelWindow title={`cert_${index + 1}.key`} className="h-full group">
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-start gap-3 mb-4">
+                        <div className="p-2 border-2 border-primary bg-primary/20 mt-1 flex-shrink-0">
+                          <Award className="w-4 sm:w-5 h-4 sm:h-5 text-primary" />
                         </div>
-                      )}
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-pixel text-xs sm:text-sm mb-2 leading-tight break-words">
+                            {cert.title}
+                          </h3>
+                          <p className="text-xs text-secondary font-pixel mb-1">{cert.issuer}</p>
+                          {cert.courses && <p className="text-xs text-muted-foreground">{cert.courses}</p>}
+                        </div>
+                      </div>
+                      
+                      <div className="flex items-center justify-between mt-4 pt-4 border-t-2 border-border gap-2">
+                        <span
+                          className={`text-xs px-2 sm:px-3 py-1 font-pixel border-2 whitespace-nowrap ${
+                            cert.status === "Completed"
+                              ? "bg-primary/20 text-primary border-primary"
+                              : "bg-accent/20 text-accent border-accent"
+                          }`}
+                        >
+                          {cert.status === "Completed" ? "✓ DONE" : "⚡ WIP"}
+                        </span>
+                        {cert.link ? (
+                          <Button
+                            size="sm"
+                            variant="ghost"
+                            className="hover:scale-110 transition-transform p-2 h-auto flex-shrink-0"
+                            asChild
+                          >
+                            <a href={cert.link} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="w-4 h-4" />
+                            </a>
+                          </Button>
+                        ) : (
+                          <div className="opacity-50 p-2 flex-shrink-0">
+                            <ExternalLink className="w-4 h-4" />
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  </div>
+                  </PixelWindow>
                 </div>
               );
             };
