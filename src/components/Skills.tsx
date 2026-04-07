@@ -1,6 +1,7 @@
 import { Code, Cpu, Wrench, Layers } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useRipple } from "@/hooks/useRipple";
+import PixelWindow from "./PixelWindow";
 
 const Skills = () => {
   const createRipple = useRipple();
@@ -47,40 +48,34 @@ const Skills = () => {
               return (
                 <div
                   ref={ref}
-                  className={`glass-strong p-5 sm:p-8 interactive-hover group transition-all duration-700 relative ${
+                  className={`transition-all duration-700 ${
                     isVisible ? 'reveal-scale opacity-100' : 'opacity-0'
                   }`}
                   style={{ transitionDelay: `${index * 100}ms` }}
                 >
-                  {/* Pixel corners */}
-                  <div className="absolute -top-2 -left-2 w-4 h-4 bg-primary hidden sm:block" />
-                  <div className="absolute -top-2 -right-2 w-4 h-4 bg-secondary hidden sm:block" />
-                  <div className="absolute -bottom-2 -left-2 w-4 h-4 bg-accent hidden sm:block" />
-                  <div className="absolute -bottom-2 -right-2 w-4 h-4 bg-primary hidden sm:block" />
-                  
-                  <div className="relative z-10">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className={`p-2 sm:p-3 border-2 border-${category.color} bg-${category.color}/20 transition-transform hover:scale-110 flex-shrink-0`}>
-                        <Icon className={`w-5 sm:w-6 h-5 sm:h-6 text-${category.color}`} />
+                  <PixelWindow title={`${category.title.toLowerCase().replace(/\s+/g, '_')}.h`} className="h-full group">
+                    <div className="p-5 sm:p-6">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className={`p-2 sm:p-3 border-2 border-${category.color} bg-${category.color}/20 transition-transform hover:scale-110 flex-shrink-0`}>
+                          <Icon className={`w-5 sm:w-6 h-5 sm:h-6 text-${category.color}`} />
+                        </div>
+                        <h3 className="text-sm sm:text-lg font-pixel">{category.title}</h3>
                       </div>
-                      <h3 className="text-sm sm:text-lg font-pixel">{category.title}</h3>
+                      
+                      <div className="flex flex-wrap gap-2">
+                        {category.skills.map((skill, i) => (
+                          <span
+                            key={i}
+                            className="px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-pixel hover:scale-110 hover:bg-primary/20 transition-all cursor-default border-2 border-border bg-card"
+                            onClick={(e) => createRipple(e)}
+                            style={{ animationDelay: `${i * 50}ms` }}
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
                     </div>
-                    
-                    <div className="flex flex-wrap gap-2">
-                      {category.skills.map((skill, i) => (
-                        <span
-                          key={i}
-                          className="glass px-2 sm:px-3 py-1.5 sm:py-2 text-xs font-pixel hover:scale-110 hover:bg-primary/20 transition-all cursor-default relative overflow-hidden border-2 border-border"
-                          onClick={(e) => createRipple(e)}
-                          style={{
-                            animationDelay: `${i * 50}ms`,
-                          }}
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
+                  </PixelWindow>
                 </div>
               );
             };

@@ -1,7 +1,8 @@
-import { ExternalLink, Github, X, Minus, Square } from "lucide-react";
+import { ExternalLink, Github } from "lucide-react";
 import { Button } from "./ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState } from "react";
+import PixelWindow from "./PixelWindow";
 
 const stm32Gif = "/images/stm32.gif";
 const locationImg = "/images/Location.jpg";
@@ -253,27 +254,7 @@ const ProjectCard = ({ project, index, onClick }: { project: Project; index: num
       className={`transition-all duration-700 ${isVisible ? 'reveal-up opacity-100' : 'opacity-0'}`}
       style={{ transitionDelay: `${index * 150}ms` }}
     >
-      <div
-        onClick={onClick}
-        className="cursor-pointer group border-2 border-border bg-card hover:border-primary/50 transition-all duration-300 hover:shadow-[0_0_30px_hsl(var(--primary)/0.15)] overflow-hidden"
-      >
-        {/* Window Title Bar */}
-        <div className="flex items-center gap-2 px-3 py-2 bg-muted/50 border-b-2 border-border">
-          <div className="flex items-center gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-destructive/80" />
-            <div className="w-3 h-3 rounded-full bg-accent/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-          <span className="text-xs text-muted-foreground font-mono truncate ml-2 flex-1">
-            {project.title.toLowerCase().replace(/\s+/g, '_')}
-          </span>
-          <div className="flex items-center gap-1 text-muted-foreground">
-            <Minus className="w-3 h-3" />
-            <Square className="w-3 h-3" />
-            <X className="w-3 h-3" />
-          </div>
-        </div>
-
+      <PixelWindow title={project.title.toLowerCase().replace(/\s+/g, '_')} onClick={onClick} className="group h-full">
         {/* Image/GIF Preview */}
         <div className="relative w-full aspect-video overflow-hidden bg-background">
           <img
@@ -297,19 +278,19 @@ const ProjectCard = ({ project, index, onClick }: { project: Project; index: num
             {project.tags.slice(0, 3).map((tag, i) => (
               <span
                 key={i}
-                className="px-2 py-0.5 text-[10px] sm:text-xs font-mono border border-primary/40 text-primary/80 bg-primary/5"
+                className="px-2 py-0.5 text-[10px] sm:text-xs font-pixel border-2 border-primary/40 text-primary/80 bg-primary/5"
               >
                 {tag}
               </span>
             ))}
             {project.tags.length > 3 && (
-              <span className="px-2 py-0.5 text-[10px] sm:text-xs font-mono text-muted-foreground">
+              <span className="px-2 py-0.5 text-[10px] sm:text-xs font-pixel text-muted-foreground">
                 +{project.tags.length - 3}
               </span>
             )}
           </div>
         </div>
-      </div>
+      </PixelWindow>
     </div>
   );
 };
@@ -327,7 +308,7 @@ const BlogContent = ({ content }: { content: string }) => {
         <ul key={`list-${listKey++}`} className="space-y-1.5 mb-6 ml-1">
           {listItems.map((item, i) => (
             <li key={i} className="flex items-start gap-2 text-muted-foreground leading-relaxed text-sm sm:text-base">
-              <span className="text-primary mt-1.5 text-xs">▸</span>
+              <span className="text-primary mt-1.5 text-xs font-pixel">▸</span>
               <span dangerouslySetInnerHTML={{ __html: formatInline(item) }} />
             </li>
           ))}
@@ -340,7 +321,7 @@ const BlogContent = ({ content }: { content: string }) => {
   const formatInline = (text: string): string => {
     return text
       .replace(/\*\*(.*?)\*\*/g, '<strong class="text-foreground font-semibold">$1</strong>')
-      .replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-muted text-primary text-xs rounded font-mono">$1</code>')
+      .replace(/`(.*?)`/g, '<code class="px-1.5 py-0.5 bg-muted text-primary text-xs font-pixel border border-border">$1</code>')
       .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer" class="text-primary hover:underline">$1</a>');
   };
 
@@ -361,14 +342,14 @@ const BlogContent = ({ content }: { content: string }) => {
     } else if (line.startsWith('## ')) {
       flushList();
       elements.push(
-        <h2 key={i} className="text-base sm:text-lg font-pixel text-foreground mb-3 mt-8 border-b border-border pb-2">
+        <h2 key={i} className="text-base sm:text-lg font-pixel text-foreground mb-3 mt-8 border-b-2 border-border pb-2">
           {line.slice(3)}
         </h2>
       );
     } else if (line.startsWith('### ')) {
       flushList();
       elements.push(
-        <h3 key={i} className="text-sm sm:text-base font-semibold text-foreground mb-2 mt-5 text-primary">
+        <h3 key={i} className="text-sm sm:text-base font-pixel text-primary mb-2 mt-5">
           {line.slice(4)}
         </h3>
       );
@@ -391,99 +372,58 @@ const BlogContent = ({ content }: { content: string }) => {
 const ProjectModal = ({ project, onClose }: { project: Project; onClose: () => void }) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
-      {/* Backdrop */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" />
 
-      {/* Modal Window */}
-      <div
-        className="relative w-full max-w-3xl max-h-[85vh] border-2 border-border bg-card flex flex-col overflow-hidden animate-fade-in"
-        onClick={(e) => e.stopPropagation()}
-      >
-        {/* Window Title Bar */}
-        <div className="flex items-center gap-2 px-4 py-2.5 bg-muted/50 border-b-2 border-border flex-shrink-0">
-          <div className="flex items-center gap-1.5">
-            <button onClick={onClose} className="w-3 h-3 rounded-full bg-destructive/80 hover:bg-destructive transition-colors" />
-            <div className="w-3 h-3 rounded-full bg-accent/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-          <span className="text-xs text-muted-foreground font-mono truncate ml-2 flex-1">
-            {project.title.toLowerCase().replace(/\s+/g, '_')}.md
-          </span>
-          <div className="flex items-center gap-2">
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Github className="w-4 h-4" />
-            </a>
-            {project.externalLink && (
-              <a
-                href={project.externalLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-primary transition-colors"
-              >
-                <ExternalLink className="w-4 h-4" />
+      <div className="relative w-full max-w-3xl max-h-[85vh] flex flex-col overflow-hidden animate-fade-in" onClick={(e) => e.stopPropagation()}>
+        <PixelWindow
+          title={`${project.title.toLowerCase().replace(/\s+/g, '_')}.md`}
+          className="flex flex-col h-full max-h-[85vh]"
+          titleBarExtra={
+            <div className="flex items-center gap-2">
+              <a href={project.link} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                <Github className="w-4 h-4" />
               </a>
-            )}
-          </div>
-        </div>
+              {project.externalLink && (
+                <a href={project.externalLink} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors">
+                  <ExternalLink className="w-4 h-4" />
+                </a>
+              )}
+            </div>
+          }
+        >
+          <div className="overflow-y-auto flex-1 p-5 sm:p-8">
+            <div className="w-full aspect-video overflow-hidden border-2 border-border mb-6">
+              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+            </div>
 
-        {/* Blog Content */}
-        <div className="overflow-y-auto flex-1 p-5 sm:p-8">
-          {/* Hero image */}
-          <div className="w-full aspect-video overflow-hidden border border-border mb-6">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-          </div>
+            <div className="flex flex-wrap gap-2 mb-6">
+              {project.tags.map((tag, i) => (
+                <span key={i} className="px-2.5 py-1 text-xs font-pixel border-2 border-primary/40 text-primary bg-primary/5">
+                  {tag}
+                </span>
+              ))}
+            </div>
 
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2 mb-6">
-            {project.tags.map((tag, i) => (
-              <span
-                key={i}
-                className="px-2.5 py-1 text-xs font-mono border border-primary/40 text-primary bg-primary/5"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+            <BlogContent content={project.blogContent} />
 
-          {/* Formatted Blog Content */}
-          <BlogContent content={project.blogContent} />
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap gap-3 mt-8 pt-6 border-t border-border">
-            <Button
-              size="sm"
-              variant="outline"
-              className="border-2 border-secondary hover:border-primary transition-all font-sans"
-              asChild
-            >
-              <a href={project.link} target="_blank" rel="noopener noreferrer">
-                <Github className="w-4 h-4 mr-2 flex-shrink-0" />
-                View on GitHub
-              </a>
-            </Button>
-            {project.externalLink && (
-              <Button
-                size="sm"
-                className="border-2 border-primary transition-all font-sans"
-                asChild
-              >
-                <a href={project.externalLink} target="_blank" rel="noopener noreferrer">
-                  <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
-                  Live Demo
+            <div className="flex flex-wrap gap-3 mt-8 pt-6 border-t-2 border-border">
+              <Button size="sm" variant="outline" className="border-2 border-secondary font-pixel text-xs" asChild>
+                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                  <Github className="w-4 h-4 mr-2 flex-shrink-0" />
+                  GITHUB
                 </a>
               </Button>
-            )}
+              {project.externalLink && (
+                <Button size="sm" className="border-2 border-primary font-pixel text-xs" asChild>
+                  <a href={project.externalLink} target="_blank" rel="noopener noreferrer">
+                    <ExternalLink className="w-4 h-4 mr-2 flex-shrink-0" />
+                    LIVE DEMO
+                  </a>
+                </Button>
+              )}
+            </div>
           </div>
-        </div>
+        </PixelWindow>
       </div>
     </div>
   );
