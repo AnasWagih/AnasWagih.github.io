@@ -3,10 +3,10 @@ import { Button } from "./ui/button";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { useState } from "react";
 
-import stm32Gif from "@/assets/stm32.gif";
-import locationImg from "@/assets/Location.jpg";
-import secImg from "@/assets/sec.jpg";
-import bitblockGif from "@/assets/BitBlock.gif";
+const stm32Gif = "/images/stm32.gif";
+const locationImg = "/images/Location.jpg";
+const secImg = "/images/sec.jpg";
+const bitblockGif = "/images/BitBlock.gif";
 
 interface Project {
   title: string;
