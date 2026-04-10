@@ -6,7 +6,7 @@ const Experience = () => {
   const { ref: headerRef, isVisible: headerVisible } = useScrollReveal();
   const experiences = [
     {
-      role: "R&D Engineer",
+      role: "R&D Intern",
       company: "Clixsys",
       period: "07/2025 – On-Going",
       description: [

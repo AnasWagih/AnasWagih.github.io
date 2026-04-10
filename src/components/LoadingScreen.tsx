@@ -88,7 +88,7 @@ const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
               showText ? 'opacity-100' : 'opacity-0'
             }`}
           >
-            ELECTRONICS & COMMUNICATIONS ENGINEER
+            ELECTRONICS & COMMUNICATIONS ENGINEERING STUDENT
           </p>
         </div>
 
