@@ -17,7 +17,7 @@ const Certifications = () => {
       title: "Deep Learning",
       issuer: "DeepLearning.AI",
       courses: "5 Courses",
-      link: "",
+      link: "https://coursera.org/share/efc807eeec6b5b8ed09afa90807e1391",
       status: "Completed"
     },
     {
