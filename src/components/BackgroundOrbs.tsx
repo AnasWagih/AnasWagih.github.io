@@ -102,15 +102,17 @@ const BackgroundOrbs = () => {
         />
       </div>
 
-      {/* Custom Pixel Cursor */}
-      <div
-        className={`custom-cursor ${isHovering ? 'custom-cursor-hover' : ''}`}
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: "translate(-50%, -50%)",
-        }}
-      />
+      {/* Custom Pixel Cursor - desktop only */}
+      {hasFinePointer && (
+        <div
+          className={`custom-cursor ${isHovering ? 'custom-cursor-hover' : ''}`}
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: "translate(-50%, -50%)",
+          }}
+        />
+      )}
 
       {/* Corner decorations - matching loading screen */}
       <div className="fixed top-4 left-4 flex gap-1 z-10 pointer-events-none">
