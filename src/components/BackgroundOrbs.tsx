@@ -3,6 +3,7 @@ import { useEffect, useState, useCallback } from "react";
 const BackgroundOrbs = () => {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [hasFinePointer, setHasFinePointer] = useState(false);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY });
@@ -14,11 +15,21 @@ const BackgroundOrbs = () => {
   }, []);
 
   useEffect(() => {
+    const mql = window.matchMedia("(hover: hover) and (pointer: fine)");
+    const update = () => setHasFinePointer(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  useEffect(() => {
+    if (!hasFinePointer) return;
     window.addEventListener("mousemove", handleMouseMove);
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [handleMouseMove]);
+  }, [handleMouseMove, hasFinePointer]);
+
 
   return (
     <>
@@ -91,15 +102,17 @@ const BackgroundOrbs = () => {
         />
       </div>
 
-      {/* Custom Pixel Cursor */}
-      <div
-        className={`custom-cursor ${isHovering ? 'custom-cursor-hover' : ''}`}
-        style={{
-          left: `${mousePosition.x}px`,
-          top: `${mousePosition.y}px`,
-          transform: "translate(-50%, -50%)",
-        }}
-      />
+      {/* Custom Pixel Cursor - desktop only */}
+      {hasFinePointer && (
+        <div
+          className={`custom-cursor ${isHovering ? 'custom-cursor-hover' : ''}`}
+          style={{
+            left: `${mousePosition.x}px`,
+            top: `${mousePosition.y}px`,
+            transform: "translate(-50%, -50%)",
+          }}
+        />
+      )}
 
       {/* Corner decorations - matching loading screen */}
       <div className="fixed top-4 left-4 flex gap-1 z-10 pointer-events-none">
